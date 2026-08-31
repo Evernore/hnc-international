@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H&amp;C INTERNATIONAL — Asia-Based Hybrid Whisky Company</title>
+<meta name="description" content="H&C International(MR.SHIN) — 대만을 거점으로 Independent Bottling, 글로벌 유통, 물류, 브랜드 컨설팅을 통합 운영하는 아시아 기반 하이브리드 위스키 기업">
+<meta property="og:title" content="H&C INTERNATIONAL — Asia-Based Hybrid Whisky Company">
+<meta property="og:description" content="Independent Bottling · Import & Distribution · Logistics · IB Consulting. 대만을 거점으로 한국과 일본을 연결합니다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23081120'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='30' fill='%23D9A04C' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+KR:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<script>document.documentElement.className += ' js';</script>
+<style>
+/* ============================================================
+   H&C INTERNATIONAL — Design tokens
+   근거: Design_System 리서치 (Stripe/Geist/Anthropic/Carbon/TDS/LINE)
+   - 표면: Carbon 다크 레이어링(밝아지는 표면) × Anthropic warm-dark(동일 hue 관통)
+   - 텍스트: Toss/LINE 알파 사다리 (본문 70% 하한)
+   - 타이포: TDS Typography 스케일 + 영문 세리프 디스플레이 이원화
+   - 모션: Geist 0.15s 마이크로 / M3 emphasized-decelerate 리빌
+   ============================================================ */
+:root{
+  /* 표면 사다리 — #081120은 H&C 로고 배경 실측값 */
+  --surface-00:#081120;
+  --surface-01:#0C1728;
+  --surface-02:#111E33;
+  --surface-03:#17263E;
+  --paper:#FFFFFF;
+
+  /* 텍스트 — warm ink + 알파 사다리 */
+  --ink:#F5F3EE;
+  --ink-72:rgba(245,243,238,.74);
+  --ink-55:rgba(245,243,238,.55);
+  --ink-40:rgba(245,243,238,.40);
+  --hairline:rgba(245,243,238,.08);
+  --hairline-strong:rgba(245,243,238,.14);
+  --ring:0 0 0 1px rgba(255,255,255,.10);
+  --ring-hover:0 0 0 1px rgba(255,255,255,.17);
+
+  /* 앰버 — 상태는 Carbon grade 이동 규칙 */
+  --amber:#D9A04C;                /* base — SVG 그래픽 하드코딩과 동일값 */
+  --amber-hi:hsl(36 68% 64%);     /* hover */
+  --amber-low:hsl(36 58% 42%);    /* active */
+  --amber-text:hsl(38 66% 66%);   /* 라벨·수치 전용(대형/굵은 요소만) */
+  --on-amber:#160F05;
+  --blue:#5B8FC7;                 /* 로고 블루 — 네트워크 그래픽 전용 */
+
+  /* 타이포 — TDS 스케일 */
+  --t1:30px;--t1-lh:40px; --t2:26px;--t2-lh:35px; --t3:22px;--t3-lh:31px;
+  --t4:20px;--t4-lh:29px; --t5:17px;--t5-lh:26px; --t6:15px;--t6-lh:23px;
+  --t7:13px;--t7-lh:20px;
+  --serif:'Cormorant Garamond','Noto Serif KR',Georgia,'Times New Roman','Batang','바탕',serif;
+  --sans:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --mono:ui-monospace,'Cascadia Mono','SF Mono',Consolas,monospace;
+
+  /* 모션 */
+  --dur-micro:.15s;
+  --dur-mod:.24s;
+  --dur-reveal:.55s;
+  --ease-std:cubic-bezier(.4,0,.2,1);
+  --ease-enter:cubic-bezier(.05,.7,.1,1);
+
+  --r-sm:4px;
+  --r-md:6px;
+  --nav-h:64px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--surface-00);
+  color:var(--ink-72);
+  font-family:var(--sans);
+  font-size:var(--t5);line-height:var(--t5-lh);
+  font-weight:400;letter-spacing:-.01em;
+  word-break:keep-all;overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--amber);color:var(--on-amber)}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:2px}
+
+.wrap{max-width:1120px;margin-inline:auto;padding-inline:clamp(20px,4.5vw,32px)}
+
+/* ---------- 공통: 섹션 & 헤더 ---------- */
+section{padding-block:clamp(88px,10vw,144px);background:var(--surface-00)}
+section.band{background:var(--surface-01)}
+.sec-head{margin-bottom:clamp(40px,6vw,72px)}
+.eyebrow{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--mono);font-size:12px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--amber-text);margin-bottom:22px;
+}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--amber);flex:none}
+.sec-title{
+  font-family:var(--serif);font-weight:500;color:var(--ink);
+  font-size:clamp(34px,4.6vw,52px);line-height:1.12;
+  letter-spacing:-.02em;margin-bottom:14px;
+}
+.sec-title em{font-style:italic;font-weight:500;color:var(--amber-text)}
+.sec-sub{font-size:var(--t4);line-height:var(--t4-lh);color:var(--ink-55);max-width:640px}
+
+/* 숫자류 */
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- 리빌 모션 ---------- */
+/* JS 실행이 확인된 경우(.js)에만 숨김 — 스크립트가 죽어도 콘텐츠는 보인다 */
+.js .reveal{opacity:0;transform:translateY(22px)}
+.reveal{transition:opacity var(--dur-reveal) var(--ease-enter),transform var(--dur-reveal) var(--ease-enter);
+  transition-delay:var(--d,0s)}
+.js .reveal.in{opacity:1;transform:none}
+
+/* ---------- 스크롤 프로그레스 ---------- */
+#progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:80;
+  background:var(--amber);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+
+/* ---------- 네비게이션 ---------- */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:70;height:var(--nav-h);
+  display:flex;align-items:center;
+  transition:background-color var(--dur-mod) var(--ease-std),
+             box-shadow var(--dur-mod) var(--ease-std),
+             backdrop-filter var(--dur-mod) var(--ease-std);
+}
+#nav.scrolled{background:rgba(8,17,32,.82);backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--hairline)}
+#nav .wrap{width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-logo{display:flex;align-items:baseline;gap:10px;flex:none}
+.nav-logo .mark{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);letter-spacing:.01em}
+.nav-logo .mark span{color:var(--amber-text)}
+.nav-logo .tag{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-55);text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{
+  font-size:14px;font-weight:500;color:var(--ink-55);padding:8px 12px;border-radius:var(--r-sm);
+  transition:color var(--dur-micro) var(--ease-std),background-color var(--dur-micro) var(--ease-std);
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--ink)}
+.nav-cta{
+  margin-left:10px;font-size:14px;font-weight:600;color:var(--on-amber)!important;
+  background:var(--amber);padding:9px 16px;border-radius:var(--r-sm);
+  transition:background-color var(--dur-micro) var(--ease-std);
+}
+.nav-cta:hover{background:var(--amber-hi)}
+.nav-cta:active{background:var(--amber-low)}
+#navToggle{display:none;background:none;border:0;cursor:pointer;padding:10px;margin-right:-10px}
+#navToggle .bar{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;
+  transition:transform var(--dur-mod) var(--ease-std),opacity var(--dur-mod) var(--ease-std)}
+@media (max-width:860px){
+  .nav-links{
+    position:fixed;top:var(--nav-h);left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
+    background:rgba(8,17,32,.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    padding:12px 20px 24px;border-bottom:1px solid var(--hairline);
+    transform:translateY(-8px);opacity:0;pointer-events:none;visibility:hidden;
+    transition:opacity var(--dur-mod) var(--ease-std),transform var(--dur-mod) var(--ease-std),
+               visibility 0s linear var(--dur-mod);
+  }
+  .nav-links.open{transform:none;opacity:1;pointer-events:auto;visibility:visible;
+    transition:opacity var(--dur-mod) var(--ease-std),transform var(--dur-mod) var(--ease-std),
+               visibility 0s}
+  .nav-links a{padding:14px 8px;font-size:16px;border-bottom:1px solid var(--hairline)}
+  .nav-links a:last-child{border-bottom:0}
+  .nav-cta{margin:14px 0 0;text-align:center}
+  #navToggle{display:block}
+  #navToggle.open .bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  #navToggle.open .bar:nth-child(2){opacity:0}
+  #navToggle.open .bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+}
+
+/* ---------- 히어로 ---------- */
+#hero{
+  position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;
+  padding-top:calc(var(--nav-h) + clamp(48px,8vh,96px));padding-bottom:0;
+  overflow:hidden;
+}
+#embers{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}
+#hero::after{ /* 앰버 라디얼 글로우 1개, 6% — Stripe 절제 감각 */
+  content:"";position:absolute;right:-18%;bottom:-32%;width:70vw;height:70vw;
+  background:radial-gradient(closest-side,rgba(217,160,76,.07),transparent 70%);
+  pointer-events:none;
+}
+.hero-body{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:center}
+.hero-eyebrow{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-55);margin-bottom:34px;
+}
+.hero-eyebrow .brand{color:var(--amber-text);font-weight:600}
+.hero-eyebrow .sep{width:1px;height:12px;background:var(--hairline-strong)}
+.hero-title{
+  font-family:var(--serif);font-weight:500;color:var(--ink);
+  font-size:clamp(46px,8.2vw,96px);line-height:1.04;letter-spacing:-.02em;
+  max-width:14em;margin-bottom:30px;
+}
+.hero-title .row{display:block}
+.hero-title em{font-style:italic;color:var(--amber-text)}
+.hero-lede{font-size:clamp(16px,1.6vw,19px);line-height:1.65;color:var(--ink-72);
+  max-width:560px;margin-bottom:42px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:50px;padding:0 26px;border-radius:var(--r-sm);
+  font-size:15px;font-weight:600;cursor:pointer;border:0;font-family:var(--sans);
+  transition:background-color var(--dur-micro) var(--ease-std),
+             box-shadow var(--dur-micro) var(--ease-std),color var(--dur-micro) var(--ease-std);
+}
+.btn-primary{background:var(--amber);color:var(--on-amber)}
+.btn-primary:hover{background:var(--amber-hi)}
+.btn-primary:active{background:var(--amber-low)}
+.btn-ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--hairline-strong)}
+.btn-ghost:hover{background:var(--surface-02);box-shadow:inset 0 0 0 1px rgba(255,255,255,.24)}
+
+/* 히어로 하단 스탯 */
+.hero-stats{
+  position:relative;z-index:1;border-top:1px solid var(--hairline);
+  margin-top:clamp(48px,7vh,80px);
+}
+.hero-stats .wrap{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  padding-block:26px;gap:16px;
+}
+.stat .v{
+  font-family:var(--serif);font-weight:500;color:var(--ink);
+  font-size:clamp(30px,3.6vw,44px);line-height:1.1;letter-spacing:-.01em;
+}
+.stat .v .suffix{font-size:.5em;color:var(--amber-text);font-family:var(--sans);font-weight:600;margin-left:2px;vertical-align:.28em}
+.stat .k{font-size:var(--t7);line-height:var(--t7-lh);color:var(--ink-55);margin-top:6px}
+.stat .k b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-55);font-weight:500;margin-bottom:3px}
+@media (max-width:720px){
+  .hero-stats .wrap{grid-template-columns:repeat(2,1fr);gap:22px 16px}
+}
+/* 세로가 짧은 노트북(≤760px)에서 히어로를 압축해 스탯까지 폴드 안에 */
+@media (min-width:561px) and (max-height:760px){
+  #hero{padding-top:calc(var(--nav-h) + 28px)}
+  .hero-title{font-size:clamp(40px,6.5vw,72px)}
+  .hero-eyebrow{margin-bottom:24px}
+  .hero-lede{margin-bottom:30px}
+  .hero-stats{margin-top:32px}
+  .hero-stats .wrap{padding-block:18px}
+}
+@media (max-width:560px){
+  #netmap .t-country{font-size:20px}
+  #netmap .t-city{font-size:26px}
+  #netmap .t-csub{font-size:16px}
+  #netmap .t-cap{font-size:18px}
+  #netmap .t-leg{font-size:15px}
+  /* 모바일: 좌우 여백만 잘라내고 네트워크 영역을 확대해 보여줌 */
+  #network .map-wrap{justify-content:flex-start}
+  #netmap{flex:0 0 118%;width:118%;margin-left:-3%}
+  #netmap .legend{transform:translateX(-95px)}
+  #netmap .t-japan{transform:translateX(-60px)}
+  /* 축소 렌더에서 지형이 사라지지 않도록 도트 확대 (SVG2 geometry property) */
+  #netmap .dots circle{r:3.4}
+  #netmap .dots-main{fill:rgba(148,170,205,.48)}
+  #netmap .dots-ctx{fill:rgba(148,170,205,.2)}
+  #netmap .arc{stroke-width:3}
+  #netmap .arc-main{stroke-width:3.6}
+  #netmap .arc-sub{stroke-width:2.2}
+  #netmap .pulse-dot{r:5.5}
+  #hero{padding-top:calc(var(--nav-h) + 36px)}
+  .hero-title{font-size:clamp(40px,11.5vw,52px)}
+  .hero-eyebrow{margin-bottom:26px}
+  .hero-eyebrow .sep{display:none}
+  .hero-lede{margin-bottom:34px}
+  .hero-stats{margin-top:40px}
+}
+
+/* ---------- About ---------- */
+#about .grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,88px)}
+#about .left .sec-head{margin-bottom:0}
+#about .body p{margin-bottom:1.2em;color:var(--ink-72)}
+#about .body p strong{color:var(--ink);font-weight:600}
+.formula{
+  margin-top:40px;border:1px solid var(--hairline);border-radius:var(--r-md);
+  background:var(--surface-02);box-shadow:var(--ring),0 2px 2px rgba(0,0,0,.22),0 8px 8px -8px rgba(0,0,0,.25);
+  border:0;
+  padding:26px 28px;
+}
+.formula .terms{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;
+  font-family:var(--mono);font-size:clamp(12px,1.4vw,14px);letter-spacing:.12em;color:var(--ink)}
+.formula .plus{color:var(--amber-text);font-weight:600}
+.formula .cap{margin-top:14px;font-size:var(--t6);line-height:var(--t6-lh);color:var(--ink-55)}
+@media (max-width:860px){#about .grid{grid-template-columns:1fr}}
+
+/* ---------- Business: 괘선 그리드 (Geist GridCross — 이 섹션 한정) ---------- */
+.biz-grid{position:relative;border:1px solid var(--hairline-strong)}
+.biz-cell{
+  padding:clamp(28px,4vw,44px);position:relative;
+  border-bottom:1px dashed var(--hairline-strong);
+  transition:background-color var(--dur-mod) var(--ease-std);
+}
+.biz-cell:hover{background:var(--surface-01)}
+.biz-cell:last-child{border-bottom:0}
+@media (min-width:861px){
+  .biz-grid{display:grid;grid-template-columns:1fr 1fr}
+  /* nth-of-type: .cross 스팬을 세지 않고 article 셀만 센다 */
+  .biz-cell:nth-of-type(odd){border-right:1px dashed var(--hairline-strong)}
+  .biz-cell:nth-of-type(3){border-bottom:0}
+}
+.cross{position:absolute;width:13px;height:13px;pointer-events:none;z-index:2}
+.cross::before,.cross::after{content:"";position:absolute;background:var(--ink-40)}
+.cross::before{left:6px;top:0;width:1px;height:13px}
+.cross::after{left:0;top:6px;width:13px;height:1px}
+.cross.tl{top:-7px;left:-7px}.cross.tr{top:-7px;right:-7px}
+.cross.bl{bottom:-7px;left:-7px}.cross.br{bottom:-7px;right:-7px}
+.biz-no{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--amber-text);margin-bottom:18px;display:block}
+.biz-en{font-family:var(--serif);font-size:clamp(24px,2.6vw,31px);line-height:1.15;font-weight:500;color:var(--ink);letter-spacing:-.015em}
+.biz-kr{font-size:var(--t6);color:var(--ink-55);margin-top:6px;margin-bottom:16px}
+.biz-desc{font-size:var(--t6);line-height:1.65;color:var(--ink-72);margin-bottom:18px}
+.biz-list{display:flex;flex-direction:column;gap:9px}
+.biz-list li{
+  font-size:var(--t6);line-height:var(--t6-lh);color:var(--ink-72);
+  padding-left:18px;position:relative;
+}
+.biz-list li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:1px;background:var(--amber)}
+.biz-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chip{
+  font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.01em;color:var(--amber-text);
+  border:1px solid rgba(217,160,76,.28);border-radius:999px;padding:5px 12px;
+}
+.chip.neutral{color:var(--ink-55);border-color:var(--hairline-strong)}
+.cell-note{margin-top:12px;font-size:var(--t7);line-height:var(--t7-lh);color:var(--ink-55)}
+
+/* 컨설팅 프로세스 스트립 */
+.process{
+  margin-top:56px;
+}
+.process h3{
+  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-55);margin-bottom:24px;
+  display:flex;align-items:center;gap:12px;
+}
+.process h3::after{content:"";height:1px;flex:1;background:var(--hairline)}
+.steps{display:grid;grid-template-columns:repeat(7,1fr);gap:0;counter-reset:step}
+.step{
+  position:relative;padding:18px 14px 4px 0;
+}
+.step::before{ /* 트랙 라인 */
+  content:"";position:absolute;top:3px;left:0;right:0;height:1px;background:var(--hairline-strong);
+}
+.step::after{ /* 마커 */
+  content:"";position:absolute;top:0;left:0;width:7px;height:7px;border-radius:50%;
+  background:var(--surface-00);border:1px solid var(--amber);
+}
+.step:first-child::after{background:var(--amber)}
+.step .n{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-55);display:block;margin-bottom:5px}
+.step .t{font-size:var(--t7);line-height:1.45;color:var(--ink-72);font-weight:500}
+@media (max-width:860px){
+  .steps{grid-template-columns:repeat(4,1fr);row-gap:26px}
+}
+@media (max-width:560px){
+  .steps{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ---------- Brands ---------- */
+.brand-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media (max-width:720px){.brand-grid{grid-template-columns:1fr}}
+.brand-card{
+  border-radius:var(--r-md);overflow:hidden;background:var(--surface-02);
+  box-shadow:var(--ring),0 2px 2px rgba(0,0,0,.22),0 8px 8px -8px rgba(0,0,0,.25);
+  transition:box-shadow var(--dur-mod) var(--ease-std),transform var(--dur-mod) var(--ease-std);
+}
+.brand-card:hover{
+  box-shadow:var(--ring-hover),0 2px 2px rgba(0,0,0,.25),0 12px 20px -8px rgba(0,0,0,.35);
+  transform:translateY(-2px);
+}
+.brand-logo{
+  height:190px;display:flex;align-items:center;justify-content:center;
+  background:var(--paper);padding:26px;
+}
+.brand-logo.navy{background:#081120}
+.brand-logo img{max-height:100%;width:auto;max-width:78%;object-fit:contain}
+.brand-info{padding:24px 26px 28px;border-top:1px solid var(--hairline)}
+.brand-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.brand-name{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink);letter-spacing:0}
+.brand-tag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--amber-text);border:1px solid rgba(217,160,76,.28);border-radius:999px;padding:4px 10px;flex:none}
+.brand-desc{font-size:var(--t6);line-height:1.65;color:var(--ink-72)}
+
+/* ---------- Network ---------- */
+.net-layout{display:flex;flex-direction:column;gap:20px}
+#network .map-wrap{
+  border-radius:var(--r-md);background:var(--surface-01);
+  box-shadow:var(--ring);
+  padding:clamp(10px,2vw,26px);
+  display:flex;align-items:center;
+  overflow:hidden;
+}
+#netmap{width:100%;height:auto;display:block}
+#netmap text{font-family:var(--mono);text-transform:uppercase}
+#netmap .t-country{font-size:13px;letter-spacing:.3em;font-weight:500;fill:rgba(245,243,238,.28)}
+#netmap .t-city{font-size:15px;font-weight:600;letter-spacing:.12em;fill:#F5F3EE}
+#netmap .t-csub{font-size:10px;letter-spacing:.14em;fill:rgba(245,243,238,.58)}
+#netmap .t-csub.amber{fill:rgba(217,160,76,.9)}
+#netmap .t-cap{font-size:12px;letter-spacing:.28em;fill:rgba(245,243,238,.5)}
+#netmap .t-leg{font-size:10.5px;letter-spacing:.14em;fill:rgba(245,243,238,.58)}
+#netmap .arc{stroke:rgba(91,143,199,.5);stroke-width:1.3;fill:none}
+#netmap .arc-main{stroke:rgba(217,160,76,.6);stroke-width:1.6}
+#netmap .arc-sub{stroke:rgba(91,143,199,.35);stroke-width:1}
+#netmap .dots{transition:opacity 1.2s var(--ease-enter)}
+#netmap .dots-ctx{transition-delay:.25s}
+#netmap.map-pre .dots{opacity:0}
+.net-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:740px){.net-cards{grid-template-columns:1fr}}
+.net-card{
+  border-radius:var(--r-md);background:var(--surface-02);
+  box-shadow:var(--ring),0 2px 2px rgba(0,0,0,.22),0 8px 8px -8px rgba(0,0,0,.25);
+  padding:28px;transition:box-shadow var(--dur-mod) var(--ease-std),transform var(--dur-mod) var(--ease-std);
+}
+.net-card:hover{box-shadow:var(--ring-hover),0 2px 2px rgba(0,0,0,.25),0 12px 20px -8px rgba(0,0,0,.35);transform:translateY(-2px)}
+.net-card .country{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.net-card .country .en{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--ink)}
+.net-card .country .role{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-text)}
+.net-card .kr-role{font-size:var(--t7);color:var(--ink-55);margin-bottom:16px}
+.net-card ul{display:flex;flex-direction:column;gap:9px}
+.net-card li{font-size:var(--t6);line-height:var(--t6-lh);color:var(--ink-72);padding-left:18px;position:relative}
+.net-card li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:1px;background:var(--blue)}
+.net-card li b{color:var(--ink);font-weight:600}
+.net-note{
+  margin-top:26px;padding:18px 24px;border-left:2px solid var(--amber);
+  background:var(--surface-01);border-radius:0 var(--r-sm) var(--r-sm) 0;
+  font-size:var(--t6);line-height:var(--t6-lh);color:var(--ink-55);
+}
+.net-note b{color:var(--ink-72);font-weight:600}
+
+/* ---------- Strengths ---------- */
+.str-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--hairline-strong)}
+@media (max-width:860px){.str-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.str-grid{grid-template-columns:1fr}}
+.str-item{
+  padding:30px 26px 34px 0;border-bottom:1px solid var(--hairline);
+  margin-right:26px;
+}
+.str-item .no{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--amber-text);display:block;margin-bottom:14px}
+.str-item .txt{font-size:var(--t5);line-height:1.6;color:var(--ink);font-weight:500}
+
+/* ---------- Leadership ---------- */
+.lead-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:22px}
+@media (max-width:720px){.lead-grid{grid-template-columns:1fr}}
+.lead-card{
+  border-radius:var(--r-md);background:var(--surface-02);
+  box-shadow:var(--ring),0 2px 2px rgba(0,0,0,.22),0 8px 8px -8px rgba(0,0,0,.25);
+  padding:34px 32px;
+}
+.lead-top{display:flex;align-items:center;gap:18px;margin-bottom:22px}
+.monogram{
+  width:56px;height:56px;border-radius:50%;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--surface-03);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
+  font-family:var(--serif);font-size:24px;font-weight:600;color:var(--amber-text);
+}
+.lead-name{font-size:var(--t3);line-height:var(--t3-lh);font-weight:700;color:var(--ink)}
+.lead-role{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin-top:3px}
+.lead-card ul{display:flex;flex-direction:column;gap:10px}
+.lead-card li{font-size:var(--t6);line-height:var(--t6-lh);color:var(--ink-72);padding-left:18px;position:relative}
+.lead-card li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:1px;background:var(--amber)}
+.org-note{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:18px 24px;border-radius:var(--r-md);background:var(--surface-01);
+  box-shadow:var(--ring);
+  font-size:var(--t6);color:var(--ink-55);
+}
+.org-note .badge{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--amber-text);border:1px solid rgba(217,160,76,.28);border-radius:999px;padding:4px 10px;flex:none}
+
+/* ---------- Roadmap ---------- */
+.road-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative}
+@media (max-width:860px){.road-grid{grid-template-columns:1fr;gap:36px}}
+.road-col{padding-right:36px;position:relative;padding-top:26px}
+.road-col::before{ /* 트랙 */
+  content:"";position:absolute;top:3px;left:0;right:0;height:1px;background:var(--hairline-strong);
+}
+.road-col:last-child::before{right:36px}
+.road-col::after{ /* 마커 */
+  content:"";position:absolute;top:0;left:0;width:7px;height:7px;border-radius:50%;
+  background:var(--surface-01);border:1px solid var(--amber);
+}
+.road-col.now::after{background:var(--amber)}
+@media (max-width:860px){
+  .road-col{padding-right:0}
+  .road-col:last-child::before{right:0}
+}
+.road-term{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-55);display:block;margin-bottom:6px}
+.road-year{font-family:var(--serif);font-size:clamp(26px,2.8vw,34px);font-weight:500;color:var(--ink);letter-spacing:-.01em;margin-bottom:20px}
+.road-col.now .road-year{color:var(--amber-text)}
+.road-col ul{display:flex;flex-direction:column;gap:11px}
+.road-col li{font-size:var(--t6);line-height:var(--t6-lh);color:var(--ink-72);padding-left:18px;position:relative}
+.road-col li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:1px;background:var(--amber)}
+
+/* ---------- Vision ---------- */
+#vision{position:relative;overflow:hidden;text-align:center;
+  padding-block:clamp(110px,14vw,190px)}
+#vision::before{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:80vw;height:60vw;max-width:1100px;max-height:800px;
+  background:radial-gradient(closest-side,rgba(217,160,76,.06),transparent 70%);
+  pointer-events:none;
+}
+#vision .eyebrow{justify-content:center}
+#vision .eyebrow::before{display:none}
+.vision-quote{
+  position:relative;font-family:var(--serif);font-weight:500;color:var(--ink);
+  font-size:clamp(28px,4.4vw,50px);line-height:1.3;letter-spacing:-.015em;
+  max-width:20em;margin:0 auto 30px;
+}
+/* 한글엔 이탤릭 폰트가 없어 합성 기울임이 생기므로 색으로만 강조 */
+.vision-quote em{font-style:normal;color:var(--amber-text)}
+.vision-body{position:relative;font-size:var(--t5);line-height:1.7;color:var(--ink-55);max-width:620px;margin:0 auto}
+
+/* ---------- Contact ---------- */
+#contact .box{
+  border-radius:var(--r-md);background:var(--surface-02);
+  box-shadow:var(--ring),0 2px 2px rgba(0,0,0,.22),0 12px 24px -8px rgba(0,0,0,.3);
+  padding:clamp(40px,6vw,72px);
+  display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px;align-items:center;
+}
+@media (max-width:860px){#contact .box{grid-template-columns:1fr}}
+#contact .sec-head{margin-bottom:0}
+#contact .sec-sub{max-width:none}
+.contact-right{display:flex;flex-direction:column;gap:16px}
+.contact-right .btn{width:100%}
+.contact-right .fine{font-size:var(--t7);line-height:var(--t7-lh);color:var(--ink-55);text-align:center}
+.contact-topics{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+
+/* ---------- Footer ---------- */
+footer{background:var(--surface-00);border-top:1px solid var(--hairline);padding:56px 0 40px}
+.foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:44px}
+.foot-brand .mark{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink)}
+.foot-brand .mark span{color:var(--amber-text)}
+.foot-brand .desc{margin-top:10px;font-size:var(--t7);line-height:var(--t7-lh);color:var(--ink-55);max-width:300px}
+.foot-col h3{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-55);margin-bottom:14px}
+.foot-col ul{display:flex;flex-direction:column;gap:9px}
+.foot-col a,.foot-col li{font-size:var(--t7);line-height:var(--t7-lh);color:var(--ink-55)}
+.foot-col a:hover{color:var(--ink)}
+.foot-base{
+  border-top:1px solid var(--hairline);padding-top:22px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12px;color:var(--ink-55);
+}
+.foot-base .proto{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .js .reveal{opacity:1;transform:none}
+  #embers{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="progress" aria-hidden="true"></div>
+
+<!-- ==================== NAV ==================== -->
+<header id="nav">
+  <div class="wrap">
+    <a class="nav-logo" href="#hero" aria-label="H&C International 홈">
+      <span class="mark">H<span>&amp;</span>C</span>
+      <span class="tag">International</span>
+    </a>
+    <button id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navLinks">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="주요 섹션">
+      <a href="#about">About</a>
+      <a href="#business">Business</a>
+      <a href="#brands">Brands</a>
+      <a href="#network">Network</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#roadmap">Roadmap</a>
+      <a class="nav-cta" href="#contact">파트너십 문의</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero">
+  <canvas id="embers" aria-hidden="true"></canvas>
+  <div class="hero-body wrap">
+    <p class="hero-eyebrow reveal">
+      <span class="brand">H&amp;C International</span>
+      <span class="sep"></span>
+      <span>Taiwan · Korea · Japan</span>
+    </p>
+    <h1 class="hero-title">
+      <span class="row reveal" style="--d:.08s">From Cask to Market,</span>
+      <span class="row reveal" style="--d:.18s"><em>Across Asia.</em></span>
+    </h1>
+    <p class="hero-lede reveal" style="--d:.3s">
+      Independent Bottling, 글로벌 유통, 물류 서비스, 그리고 브랜드 컨설팅을
+      하나의 플랫폼으로 통합한 <strong>아시아 기반의 하이브리드 위스키 기업</strong>입니다.
+    </p>
+    <div class="hero-cta reveal" style="--d:.4s">
+      <a class="btn btn-primary" href="#business">사업 영역 보기</a>
+      <a class="btn btn-ghost" href="#contact">파트너십 문의</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="wrap">
+      <div class="stat reveal" style="--d:.1s">
+        <div class="v"><span class="num" data-count="4">0</span></div>
+        <div class="k"><b>Business Areas</b>사업 영역</div>
+      </div>
+      <div class="stat reveal" style="--d:.18s">
+        <div class="v"><span class="num" data-count="3">0</span></div>
+        <div class="k"><b>Countries</b>거점 · 확장 국가</div>
+      </div>
+      <div class="stat reveal" style="--d:.26s">
+        <div class="v"><span class="num" data-count="8">0</span><span class="suffix">종</span></div>
+        <div class="k"><b>Annual IB Releases</b>연간 IB 출시 (최대)</div>
+      </div>
+      <div class="stat reveal" style="--d:.34s">
+        <div class="v"><span class="num" data-count="4">0</span></div>
+        <div class="k"><b>Brands</b>운영 브랜드</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about" class="band">
+  <div class="wrap grid">
+    <div class="left">
+      <div class="sec-head reveal">
+        <p class="eyebrow">About H&amp;C</p>
+        <h2 class="sec-title">The Hybrid<br>Whisky Company</h2>
+        <p class="sec-sub">단순한 판매를 넘어, 기획부터 출시까지.</p>
+      </div>
+    </div>
+    <div class="body">
+      <p class="reveal" style="--d:.1s">
+        <strong>H&amp;C International(MR.SHIN)</strong>은 대만을 거점으로
+        Independent Bottling(IB), 글로벌 유통, 물류 서비스, 그리고 브랜드 컨설팅을
+        통합 운영하는 위스키 전문 기업입니다. 현재 대만과 한국에서 함께 운영하고 있습니다.
+      </p>
+      <p class="reveal" style="--d:.18s">
+        단순한 위스키 판매를 넘어 <strong>제품 기획부터 유통, 물류, 브랜드 개발까지</strong>
+        아우르는 아시아 기반의 하이브리드 비즈니스 모델을 구축하고 있습니다.
+      </p>
+      <div class="formula reveal" style="--d:.26s">
+        <div class="terms">
+          <span>PRODUCT</span><span class="plus">+</span>
+          <span>DISTRIBUTION</span><span class="plus">+</span>
+          <span>LOGISTICS</span><span class="plus">+</span>
+          <span>CONSULTING</span>
+        </div>
+        <p class="cap">4개의 사업 영역을 결합한 다중 수익 구조(Multi Revenue Stream)로
+        안정적인 수익과 지속 가능한 캐시플로우를 구축합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BUSINESS ==================== -->
+<section id="business">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Business</p>
+      <h2 class="sec-title">Four Pillars</h2>
+      <p class="sec-sub">H&amp;C의 수익 구조를 떠받치는 4개의 사업 영역입니다.</p>
+    </div>
+
+    <div class="biz-grid reveal">
+      <span class="cross tl" aria-hidden="true"></span>
+      <span class="cross tr" aria-hidden="true"></span>
+      <span class="cross bl" aria-hidden="true"></span>
+      <span class="cross br" aria-hidden="true"></span>
+
+      <article class="biz-cell">
+        <span class="biz-no">01</span>
+        <h3 class="biz-en">Independent Bottling</h3>
+        <p class="biz-kr">인디펜던트 보틀링 — MR.SHIN</p>
+        <p class="biz-desc">MR.SHIN 브랜드를 중심으로 자체 IB를 기획해 현재 대만을 중심으로 출시하고 있습니다.
+        안정적인 캐스크 샘플 확보를 바탕으로 라인업을 지속 확대합니다.</p>
+        <ul class="biz-list">
+          <li>MR.SHIN 브랜드 자체 출시</li>
+          <li>한정판 IB 기획 및 판매</li>
+          <li>파트너사 공동 프로젝트 운영</li>
+        </ul>
+        <div class="biz-chips">
+          <span class="chip">자체 브랜드 연 4~7종</span>
+          <span class="chip">협업 포함 최대 연 8종</span>
+        </div>
+        <p class="cell-note">* 출시 수량은 시장 상황에 따라 유연하게 운영합니다.</p>
+      </article>
+
+      <article class="biz-cell">
+        <span class="biz-no">02</span>
+        <h3 class="biz-en">Import &amp; Distribution</h3>
+        <p class="biz-kr">수입 · 유통</p>
+        <p class="biz-desc">대만 현지 수입사와 협력하여 도매와 소매를 동시에
+        운영하는 유통 구조를 확보하고 있습니다.</p>
+        <ul class="biz-list">
+          <li><b>B2B</b> — 도매 유통</li>
+          <li><b>B2C</b> — 소매 판매</li>
+          <li>현지 수입사 협력 기반의 안정적 공급망</li>
+        </ul>
+        <div class="biz-chips">
+          <span class="chip neutral">B2B + B2C 동시 운영</span>
+        </div>
+      </article>
+
+      <article class="biz-cell">
+        <span class="biz-no">03</span>
+        <h3 class="biz-en">Logistics Service</h3>
+        <p class="biz-kr">물류 서비스</p>
+        <p class="biz-desc">위스키에 특화된 보관·픽업·납품 서비스를 운영합니다.
+        개인 컬렉터부터 파트너 업체까지 폭넓게 지원합니다.</p>
+        <ul class="biz-list">
+          <li>위스키 보관 서비스</li>
+          <li>픽업 서비스</li>
+          <li>국내외 납품</li>
+        </ul>
+        <div class="biz-chips">
+          <span class="chip neutral">개인 컬렉터</span>
+          <span class="chip neutral">BAR</span>
+          <span class="chip neutral">수입사</span>
+          <span class="chip neutral">파트너 업체</span>
+        </div>
+      </article>
+
+      <article class="biz-cell">
+        <span class="biz-no">04</span>
+        <h3 class="biz-en">IB Consulting</h3>
+        <p class="biz-kr">IB 컨설팅</p>
+        <p class="biz-desc">한국과 아시아 시장을 대상으로 캐스크 선정부터
+        판매 전략까지, IB 출시의 전 과정을 지원합니다.</p>
+        <ul class="biz-list">
+          <li>캐스크 샘플 제공 및 선정 지원</li>
+          <li>제품 기획 · 디자인 · 생산</li>
+          <li>출시 및 판매 전략 수립</li>
+        </ul>
+        <div class="biz-chips">
+          <span class="chip">End-to-End 지원</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="process reveal">
+      <h3>IB Consulting Process — 캐스크에서 출시까지</h3>
+      <div class="steps">
+        <div class="step"><span class="n">STEP 1</span><span class="t">캐스크 샘플 제공</span></div>
+        <div class="step"><span class="n">STEP 2</span><span class="t">캐스크 선정</span></div>
+        <div class="step"><span class="n">STEP 3</span><span class="t">제품 기획</span></div>
+        <div class="step"><span class="n">STEP 4</span><span class="t">디자인</span></div>
+        <div class="step"><span class="n">STEP 5</span><span class="t">생산</span></div>
+        <div class="step"><span class="n">STEP 6</span><span class="t">출시</span></div>
+        <div class="step"><span class="n">STEP 7</span><span class="t">판매 전략</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BRANDS ==================== -->
+<section id="brands" class="band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Brand Family</p>
+      <h2 class="sec-title">One House, <em>Four Brands</em></h2>
+      <p class="sec-sub">H&amp;C가 만들고 운영하는 브랜드들입니다.</p>
+    </div>
+    <div class="brand-grid">
+      <article class="brand-card reveal">
+        <div class="brand-logo"><img src="assets/mr-shin.jpg" alt="MR.SHIN Korea 로고"></div>
+        <div class="brand-info">
+          <div class="brand-top">
+            <h3 class="brand-name">MR.SHIN</h3>
+            <span class="brand-tag">IB Bottle Brand</span>
+          </div>
+          <p class="brand-desc">H&amp;C의 시그니처 인디펜던트 보틀링 브랜드.
+          연 4~7종의 자체 보틀링과 한정판, 파트너 협업 보틀을 출시합니다.</p>
+        </div>
+      </article>
+
+      <article class="brand-card reveal" style="--d:.08s">
+        <div class="brand-logo"><img src="assets/whisky-lab.jpg" alt="Whisky Lab 로고"></div>
+        <div class="brand-info">
+          <div class="brand-top">
+            <h3 class="brand-name">Whisky Lab</h3>
+            <span class="brand-tag">BAR Franchise</span>
+          </div>
+          <p class="brand-desc">위스키 경험의 최전선에 있는 프랜차이즈 BAR.
+          스토어픽(Store Pick) 보틀을 출시하며 소비자 접점을 만듭니다.</p>
+        </div>
+      </article>
+
+      <article class="brand-card reveal" style="--d:.16s">
+        <div class="brand-logo navy"><img src="assets/hnc-mark.jpg" alt="H&C International 로고"></div>
+        <div class="brand-info">
+          <div class="brand-top">
+            <h3 class="brand-name">House Cask</h3>
+            <span class="brand-tag">House Bottling</span>
+          </div>
+          <p class="brand-desc">그룹의 모체이자 하우스 보틀링 라인.
+          하우스 캐스크의 이름으로 자체 바틀을 출시합니다.</p>
+        </div>
+      </article>
+
+      <article class="brand-card reveal" style="--d:.24s">
+        <div class="brand-logo"><img src="assets/iolyt.png" alt="IOLYT 유기견 봉사단체 로고"></div>
+        <div class="brand-info">
+          <div class="brand-top">
+            <h3 class="brand-name">IOLYT</h3>
+            <span class="brand-tag">Social Contribution</span>
+          </div>
+          <p class="brand-desc">"I Only Love You Too" — H&amp;C가 함께 운영하는
+          유기견 봉사단체입니다. 브랜드와 함께 성장하는 사회공헌 활동입니다.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== NETWORK ==================== -->
+<section id="network">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Global Network</p>
+      <h2 class="sec-title">Korea Hub, <em>Asian Reach</em></h2>
+      <p class="sec-sub">한국을 중심으로 대만과 일본을 연결하고, 아시아 IB 네트워크를 확장합니다.</p>
+    </div>
+
+    <div class="net-layout">
+    <div class="map-wrap reveal">
+      <svg id="netmap" viewBox="0 0 1240 624" role="img" aria-label="한국 울산 허브를 중심으로 대만(타이베이)과 일본(후쿠오카, 오사카, 도쿄)을 연결하는 아시아 IB 네트워크 지도 (대만 위치는 구도를 위해 조정됨)">
+        <defs>
+          <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(217,160,76,.20)"/>
+            <stop offset="100%" stop-color="rgba(217,160,76,0)"/>
+          </radialGradient>
+        </defs>
+
+        <!-- 지형 도트 (Natural Earth 50m, Mercator · 대만은 구도상 북상, 상단은 크롭) -->
+        <g class="dots dots-ctx" fill="rgba(148,170,205,.16)"><circle cx="332" cy="24" r="2.5"/><circle cx="341" cy="24" r="2.5"/><circle cx="350" cy="24" r="2.5"/><circle cx="359" cy="24" r="2.5"/><circle cx="368" cy="24" r="2.5"/><circle cx="377" cy="24" r="2.5"/><circle cx="386" cy="24" r="2.5"/><circle cx="395" cy="24" r="2.5"/><circle cx="404" cy="24" r="2.5"/><circle cx="413" cy="24" r="2.5"/><circle cx="422" cy="24" r="2.5"/><circle cx="431" cy="24" r="2.5"/><circle cx="440" cy="24" r="2.5"/><circle cx="449" cy="24" r="2.5"/><circle cx="458" cy="24" r="2.5"/><circle cx="467" cy="24" r="2.5"/><circle cx="476" cy="24" r="2.5"/><circle cx="485" cy="24" r="2.5"/><circle cx="318.5" cy="31.8" r="2.5"/><circle cx="327.5" cy="31.8" r="2.5"/><circle cx="336.5" cy="31.8" r="2.5"/><circle cx="345.5" cy="31.8" r="2.5"/><circle cx="354.5" cy="31.8" r="2.5"/><circle cx="363.5" cy="31.8" r="2.5"/><circle cx="372.5" cy="31.8" r="2.5"/><circle cx="381.5" cy="31.8" r="2.5"/><circle cx="390.5" cy="31.8" r="2.5"/><circle cx="399.5" cy="31.8" r="2.5"/><circle cx="408.5" cy="31.8" r="2.5"/><circle cx="417.5" cy="31.8" r="2.5"/><circle cx="426.5" cy="31.8" r="2.5"/><circle cx="435.5" cy="31.8" r="2.5"/><circle cx="444.5" cy="31.8" r="2.5"/><circle cx="453.5" cy="31.8" r="2.5"/><circle cx="462.5" cy="31.8" r="2.5"/><circle cx="471.5" cy="31.8" r="2.5"/><circle cx="480.5" cy="31.8" r="2.5"/><circle cx="305" cy="39.6" r="2.5"/><circle cx="314" cy="39.6" r="2.5"/><circle cx="323" cy="39.6" r="2.5"/><circle cx="332" cy="39.6" r="2.5"/><circle cx="341" cy="39.6" r="2.5"/><circle cx="350" cy="39.6" r="2.5"/><circle cx="359" cy="39.6" r="2.5"/><circle cx="368" cy="39.6" r="2.5"/><circle cx="377" cy="39.6" r="2.5"/><circle cx="386" cy="39.6" r="2.5"/><circle cx="395" cy="39.6" r="2.5"/><circle cx="404" cy="39.6" r="2.5"/><circle cx="413" cy="39.6" r="2.5"/><circle cx="422" cy="39.6" r="2.5"/><circle cx="431" cy="39.6" r="2.5"/><circle cx="440" cy="39.6" r="2.5"/><circle cx="449" cy="39.6" r="2.5"/><circle cx="458" cy="39.6" r="2.5"/><circle cx="467" cy="39.6" r="2.5"/><circle cx="291.5" cy="47.4" r="2.5"/><circle cx="300.5" cy="47.4" r="2.5"/><circle cx="309.5" cy="47.4" r="2.5"/><circle cx="318.5" cy="47.4" r="2.5"/><circle cx="327.5" cy="47.4" r="2.5"/><circle cx="336.5" cy="47.4" r="2.5"/><circle cx="345.5" cy="47.4" r="2.5"/><circle cx="354.5" cy="47.4" r="2.5"/><circle cx="363.5" cy="47.4" r="2.5"/><circle cx="372.5" cy="47.4" r="2.5"/><circle cx="381.5" cy="47.4" r="2.5"/><circle cx="390.5" cy="47.4" r="2.5"/><circle cx="399.5" cy="47.4" r="2.5"/><circle cx="408.5" cy="47.4" r="2.5"/><circle cx="417.5" cy="47.4" r="2.5"/><circle cx="426.5" cy="47.4" r="2.5"/><circle cx="435.5" cy="47.4" r="2.5"/><circle cx="444.5" cy="47.4" r="2.5"/><circle cx="453.5" cy="47.4" r="2.5"/><circle cx="278" cy="55.2" r="2.5"/><circle cx="287" cy="55.2" r="2.5"/><circle cx="296" cy="55.2" r="2.5"/><circle cx="305" cy="55.2" r="2.5"/><circle cx="314" cy="55.2" r="2.5"/><circle cx="323" cy="55.2" r="2.5"/><circle cx="332" cy="55.2" r="2.5"/><circle cx="341" cy="55.2" r="2.5"/><circle cx="350" cy="55.2" r="2.5"/><circle cx="359" cy="55.2" r="2.5"/><circle cx="368" cy="55.2" r="2.5"/><circle cx="377" cy="55.2" r="2.5"/><circle cx="386" cy="55.2" r="2.5"/><circle cx="395" cy="55.2" r="2.5"/><circle cx="404" cy="55.2" r="2.5"/><circle cx="413" cy="55.2" r="2.5"/><circle cx="422" cy="55.2" r="2.5"/><circle cx="431" cy="55.2" r="2.5"/><circle cx="440" cy="55.2" r="2.5"/><circle cx="449" cy="55.2" r="2.5"/><circle cx="273.5" cy="63" r="2.5"/><circle cx="282.5" cy="63" r="2.5"/><circle cx="291.5" cy="63" r="2.5"/><circle cx="300.5" cy="63" r="2.5"/><circle cx="309.5" cy="63" r="2.5"/><circle cx="318.5" cy="63" r="2.5"/><circle cx="327.5" cy="63" r="2.5"/><circle cx="336.5" cy="63" r="2.5"/><circle cx="345.5" cy="63" r="2.5"/><circle cx="354.5" cy="63" r="2.5"/><circle cx="363.5" cy="63" r="2.5"/><circle cx="372.5" cy="63" r="2.5"/><circle cx="381.5" cy="63" r="2.5"/><circle cx="390.5" cy="63" r="2.5"/><circle cx="399.5" cy="63" r="2.5"/><circle cx="408.5" cy="63" r="2.5"/><circle cx="417.5" cy="63" r="2.5"/><circle cx="426.5" cy="63" r="2.5"/><circle cx="435.5" cy="63" r="2.5"/><circle cx="260" cy="70.8" r="2.5"/><circle cx="269" cy="70.8" r="2.5"/><circle cx="278" cy="70.8" r="2.5"/><circle cx="287" cy="70.8" r="2.5"/><circle cx="296" cy="70.8" r="2.5"/><circle cx="305" cy="70.8" r="2.5"/><circle cx="314" cy="70.8" r="2.5"/><circle cx="323" cy="70.8" r="2.5"/><circle cx="332" cy="70.8" r="2.5"/><circle cx="341" cy="70.8" r="2.5"/><circle cx="350" cy="70.8" r="2.5"/><circle cx="359" cy="70.8" r="2.5"/><circle cx="368" cy="70.8" r="2.5"/><circle cx="377" cy="70.8" r="2.5"/><circle cx="386" cy="70.8" r="2.5"/><circle cx="395" cy="70.8" r="2.5"/><circle cx="404" cy="70.8" r="2.5"/><circle cx="413" cy="70.8" r="2.5"/><circle cx="422" cy="70.8" r="2.5"/><circle cx="431" cy="70.8" r="2.5"/><circle cx="255.5" cy="78.6" r="2.5"/><circle cx="264.5" cy="78.6" r="2.5"/><circle cx="273.5" cy="78.6" r="2.5"/><circle cx="282.5" cy="78.6" r="2.5"/><circle cx="291.5" cy="78.6" r="2.5"/><circle cx="300.5" cy="78.6" r="2.5"/><circle cx="309.5" cy="78.6" r="2.5"/><circle cx="318.5" cy="78.6" r="2.5"/><circle cx="327.5" cy="78.6" r="2.5"/><circle cx="336.5" cy="78.6" r="2.5"/><circle cx="345.5" cy="78.6" r="2.5"/><circle cx="354.5" cy="78.6" r="2.5"/><circle cx="363.5" cy="78.6" r="2.5"/><circle cx="372.5" cy="78.6" r="2.5"/><circle cx="381.5" cy="78.6" r="2.5"/><circle cx="390.5" cy="78.6" r="2.5"/><circle cx="399.5" cy="78.6" r="2.5"/><circle cx="408.5" cy="78.6" r="2.5"/><circle cx="417.5" cy="78.6" r="2.5"/><circle cx="260" cy="86.4" r="2.5"/><circle cx="269" cy="86.4" r="2.5"/><circle cx="278" cy="86.4" r="2.5"/><circle cx="287" cy="86.4" r="2.5"/><circle cx="296" cy="86.4" r="2.5"/><circle cx="305" cy="86.4" r="2.5"/><circle cx="314" cy="86.4" r="2.5"/><circle cx="323" cy="86.4" r="2.5"/><circle cx="332" cy="86.4" r="2.5"/><circle cx="341" cy="86.4" r="2.5"/><circle cx="350" cy="86.4" r="2.5"/><circle cx="359" cy="86.4" r="2.5"/><circle cx="368" cy="86.4" r="2.5"/><circle cx="377" cy="86.4" r="2.5"/><circle cx="386" cy="86.4" r="2.5"/><circle cx="395" cy="86.4" r="2.5"/><circle cx="404" cy="86.4" r="2.5"/><circle cx="264.5" cy="94.1" r="2.5"/><circle cx="273.5" cy="94.1" r="2.5"/><circle cx="282.5" cy="94.1" r="2.5"/><circle cx="291.5" cy="94.1" r="2.5"/><circle cx="300.5" cy="94.1" r="2.5"/><circle cx="309.5" cy="94.1" r="2.5"/><circle cx="318.5" cy="94.1" r="2.5"/><circle cx="327.5" cy="94.1" r="2.5"/><circle cx="336.5" cy="94.1" r="2.5"/><circle cx="345.5" cy="94.1" r="2.5"/><circle cx="354.5" cy="94.1" r="2.5"/><circle cx="363.5" cy="94.1" r="2.5"/><circle cx="372.5" cy="94.1" r="2.5"/><circle cx="381.5" cy="94.1" r="2.5"/><circle cx="390.5" cy="94.1" r="2.5"/><circle cx="287" cy="101.9" r="2.5"/><circle cx="296" cy="101.9" r="2.5"/><circle cx="305" cy="101.9" r="2.5"/><circle cx="314" cy="101.9" r="2.5"/><circle cx="323" cy="101.9" r="2.5"/><circle cx="332" cy="101.9" r="2.5"/><circle cx="341" cy="101.9" r="2.5"/><circle cx="350" cy="101.9" r="2.5"/><circle cx="359" cy="101.9" r="2.5"/><circle cx="368" cy="101.9" r="2.5"/><circle cx="377" cy="101.9" r="2.5"/><circle cx="386" cy="101.9" r="2.5"/><circle cx="300.5" cy="109.7" r="2.5"/><circle cx="309.5" cy="109.7" r="2.5"/><circle cx="318.5" cy="109.7" r="2.5"/><circle cx="327.5" cy="109.7" r="2.5"/><circle cx="336.5" cy="109.7" r="2.5"/><circle cx="345.5" cy="109.7" r="2.5"/><circle cx="354.5" cy="109.7" r="2.5"/><circle cx="363.5" cy="109.7" r="2.5"/><circle cx="372.5" cy="109.7" r="2.5"/><circle cx="381.5" cy="109.7" r="2.5"/><circle cx="390.5" cy="109.7" r="2.5"/><circle cx="305" cy="117.5" r="2.5"/><circle cx="314" cy="117.5" r="2.5"/><circle cx="323" cy="117.5" r="2.5"/><circle cx="332" cy="117.5" r="2.5"/><circle cx="341" cy="117.5" r="2.5"/><circle cx="350" cy="117.5" r="2.5"/><circle cx="359" cy="117.5" r="2.5"/><circle cx="368" cy="117.5" r="2.5"/><circle cx="377" cy="117.5" r="2.5"/><circle cx="300.5" cy="125.3" r="2.5"/><circle cx="309.5" cy="125.3" r="2.5"/><circle cx="318.5" cy="125.3" r="2.5"/><circle cx="327.5" cy="125.3" r="2.5"/><circle cx="336.5" cy="125.3" r="2.5"/><circle cx="345.5" cy="125.3" r="2.5"/><circle cx="354.5" cy="125.3" r="2.5"/><circle cx="363.5" cy="125.3" r="2.5"/><circle cx="372.5" cy="125.3" r="2.5"/><circle cx="381.5" cy="125.3" r="2.5"/><circle cx="296" cy="133.1" r="2.5"/><circle cx="305" cy="133.1" r="2.5"/><circle cx="314" cy="133.1" r="2.5"/><circle cx="323" cy="133.1" r="2.5"/><circle cx="332" cy="133.1" r="2.5"/><circle cx="341" cy="133.1" r="2.5"/><circle cx="350" cy="133.1" r="2.5"/><circle cx="359" cy="133.1" r="2.5"/><circle cx="368" cy="133.1" r="2.5"/><circle cx="377" cy="133.1" r="2.5"/><circle cx="386" cy="133.1" r="2.5"/><circle cx="395" cy="133.1" r="2.5"/><circle cx="291.5" cy="140.9" r="2.5"/><circle cx="300.5" cy="140.9" r="2.5"/><circle cx="309.5" cy="140.9" r="2.5"/><circle cx="318.5" cy="140.9" r="2.5"/><circle cx="327.5" cy="140.9" r="2.5"/><circle cx="336.5" cy="140.9" r="2.5"/><circle cx="345.5" cy="140.9" r="2.5"/><circle cx="354.5" cy="140.9" r="2.5"/><circle cx="363.5" cy="140.9" r="2.5"/><circle cx="372.5" cy="140.9" r="2.5"/><circle cx="381.5" cy="140.9" r="2.5"/><circle cx="390.5" cy="140.9" r="2.5"/><circle cx="399.5" cy="140.9" r="2.5"/><circle cx="296" cy="148.7" r="2.5"/><circle cx="305" cy="148.7" r="2.5"/><circle cx="314" cy="148.7" r="2.5"/><circle cx="323" cy="148.7" r="2.5"/><circle cx="332" cy="148.7" r="2.5"/><circle cx="341" cy="148.7" r="2.5"/><circle cx="350" cy="148.7" r="2.5"/><circle cx="359" cy="148.7" r="2.5"/><circle cx="368" cy="148.7" r="2.5"/><circle cx="377" cy="148.7" r="2.5"/><circle cx="386" cy="148.7" r="2.5"/><circle cx="395" cy="148.7" r="2.5"/><circle cx="404" cy="148.7" r="2.5"/><circle cx="413" cy="148.7" r="2.5"/><circle cx="300.5" cy="156.5" r="2.5"/><circle cx="309.5" cy="156.5" r="2.5"/><circle cx="318.5" cy="156.5" r="2.5"/><circle cx="327.5" cy="156.5" r="2.5"/><circle cx="336.5" cy="156.5" r="2.5"/><circle cx="345.5" cy="156.5" r="2.5"/><circle cx="354.5" cy="156.5" r="2.5"/><circle cx="363.5" cy="156.5" r="2.5"/><circle cx="372.5" cy="156.5" r="2.5"/><circle cx="381.5" cy="156.5" r="2.5"/><circle cx="390.5" cy="156.5" r="2.5"/><circle cx="399.5" cy="156.5" r="2.5"/><circle cx="408.5" cy="156.5" r="2.5"/><circle cx="417.5" cy="156.5" r="2.5"/><circle cx="287" cy="164.3" r="2.5"/><circle cx="296" cy="164.3" r="2.5"/><circle cx="305" cy="164.3" r="2.5"/><circle cx="314" cy="164.3" r="2.5"/><circle cx="323" cy="164.3" r="2.5"/><circle cx="332" cy="164.3" r="2.5"/><circle cx="341" cy="164.3" r="2.5"/><circle cx="350" cy="164.3" r="2.5"/><circle cx="359" cy="164.3" r="2.5"/><circle cx="368" cy="164.3" r="2.5"/><circle cx="377" cy="164.3" r="2.5"/><circle cx="386" cy="164.3" r="2.5"/><circle cx="395" cy="164.3" r="2.5"/><circle cx="404" cy="164.3" r="2.5"/><circle cx="413" cy="164.3" r="2.5"/><circle cx="422" cy="164.3" r="2.5"/><circle cx="282.5" cy="172.1" r="2.5"/><circle cx="291.5" cy="172.1" r="2.5"/><circle cx="300.5" cy="172.1" r="2.5"/><circle cx="309.5" cy="172.1" r="2.5"/><circle cx="318.5" cy="172.1" r="2.5"/><circle cx="327.5" cy="172.1" r="2.5"/><circle cx="336.5" cy="172.1" r="2.5"/><circle cx="345.5" cy="172.1" r="2.5"/><circle cx="354.5" cy="172.1" r="2.5"/><circle cx="363.5" cy="172.1" r="2.5"/><circle cx="372.5" cy="172.1" r="2.5"/><circle cx="381.5" cy="172.1" r="2.5"/><circle cx="390.5" cy="172.1" r="2.5"/><circle cx="399.5" cy="172.1" r="2.5"/><circle cx="408.5" cy="172.1" r="2.5"/><circle cx="417.5" cy="172.1" r="2.5"/><circle cx="278" cy="179.9" r="2.5"/><circle cx="287" cy="179.9" r="2.5"/><circle cx="296" cy="179.9" r="2.5"/><circle cx="305" cy="179.9" r="2.5"/><circle cx="314" cy="179.9" r="2.5"/><circle cx="323" cy="179.9" r="2.5"/><circle cx="332" cy="179.9" r="2.5"/><circle cx="341" cy="179.9" r="2.5"/><circle cx="350" cy="179.9" r="2.5"/><circle cx="359" cy="179.9" r="2.5"/><circle cx="291.5" cy="187.7" r="2.5"/><circle cx="300.5" cy="187.7" r="2.5"/><circle cx="309.5" cy="187.7" r="2.5"/><circle cx="318.5" cy="187.7" r="2.5"/><circle cx="327.5" cy="187.7" r="2.5"/><circle cx="336.5" cy="187.7" r="2.5"/><circle cx="345.5" cy="187.7" r="2.5"/><circle cx="354.5" cy="187.7" r="2.5"/><circle cx="287" cy="195.5" r="2.5"/><circle cx="296" cy="195.5" r="2.5"/><circle cx="305" cy="195.5" r="2.5"/><circle cx="323" cy="195.5" r="2.5"/><circle cx="332" cy="195.5" r="2.5"/><circle cx="341" cy="195.5" r="2.5"/><circle cx="350" cy="195.5" r="2.5"/><circle cx="300.5" cy="203.3" r="2.5"/></g>
+        <g class="dots dots-main" fill="rgba(148,170,205,.40)"><circle cx="944" cy="24" r="2.5"/><circle cx="953" cy="24" r="2.5"/><circle cx="989" cy="24" r="2.5"/><circle cx="948.5" cy="31.8" r="2.5"/><circle cx="957.5" cy="31.8" r="2.5"/><circle cx="966.5" cy="31.8" r="2.5"/><circle cx="975.5" cy="31.8" r="2.5"/><circle cx="984.5" cy="31.8" r="2.5"/><circle cx="935" cy="39.6" r="2.5"/><circle cx="944" cy="39.6" r="2.5"/><circle cx="953" cy="39.6" r="2.5"/><circle cx="962" cy="39.6" r="2.5"/><circle cx="971" cy="39.6" r="2.5"/><circle cx="980" cy="39.6" r="2.5"/><circle cx="989" cy="39.6" r="2.5"/><circle cx="930.5" cy="47.4" r="2.5"/><circle cx="939.5" cy="47.4" r="2.5"/><circle cx="948.5" cy="47.4" r="2.5"/><circle cx="957.5" cy="47.4" r="2.5"/><circle cx="966.5" cy="47.4" r="2.5"/><circle cx="975.5" cy="47.4" r="2.5"/><circle cx="984.5" cy="47.4" r="2.5"/><circle cx="935" cy="55.2" r="2.5"/><circle cx="944" cy="55.2" r="2.5"/><circle cx="953" cy="55.2" r="2.5"/><circle cx="962" cy="55.2" r="2.5"/><circle cx="971" cy="55.2" r="2.5"/><circle cx="980" cy="55.2" r="2.5"/><circle cx="989" cy="55.2" r="2.5"/><circle cx="998" cy="55.2" r="2.5"/><circle cx="930.5" cy="63" r="2.5"/><circle cx="939.5" cy="63" r="2.5"/><circle cx="948.5" cy="63" r="2.5"/><circle cx="957.5" cy="63" r="2.5"/><circle cx="966.5" cy="63" r="2.5"/><circle cx="975.5" cy="63" r="2.5"/><circle cx="984.5" cy="63" r="2.5"/><circle cx="993.5" cy="63" r="2.5"/><circle cx="1002.5" cy="63" r="2.5"/><circle cx="935" cy="70.8" r="2.5"/><circle cx="944" cy="70.8" r="2.5"/><circle cx="953" cy="70.8" r="2.5"/><circle cx="962" cy="70.8" r="2.5"/><circle cx="971" cy="70.8" r="2.5"/><circle cx="980" cy="70.8" r="2.5"/><circle cx="989" cy="70.8" r="2.5"/><circle cx="998" cy="70.8" r="2.5"/><circle cx="1007" cy="70.8" r="2.5"/><circle cx="930.5" cy="78.6" r="2.5"/><circle cx="939.5" cy="78.6" r="2.5"/><circle cx="948.5" cy="78.6" r="2.5"/><circle cx="957.5" cy="78.6" r="2.5"/><circle cx="966.5" cy="78.6" r="2.5"/><circle cx="975.5" cy="78.6" r="2.5"/><circle cx="984.5" cy="78.6" r="2.5"/><circle cx="993.5" cy="78.6" r="2.5"/><circle cx="1002.5" cy="78.6" r="2.5"/><circle cx="926" cy="86.4" r="2.5"/><circle cx="935" cy="86.4" r="2.5"/><circle cx="944" cy="86.4" r="2.5"/><circle cx="953" cy="86.4" r="2.5"/><circle cx="962" cy="86.4" r="2.5"/><circle cx="971" cy="86.4" r="2.5"/><circle cx="980" cy="86.4" r="2.5"/><circle cx="989" cy="86.4" r="2.5"/><circle cx="998" cy="86.4" r="2.5"/><circle cx="1007" cy="86.4" r="2.5"/><circle cx="939.5" cy="94.1" r="2.5"/><circle cx="948.5" cy="94.1" r="2.5"/><circle cx="957.5" cy="94.1" r="2.5"/><circle cx="966.5" cy="94.1" r="2.5"/><circle cx="975.5" cy="94.1" r="2.5"/><circle cx="984.5" cy="94.1" r="2.5"/><circle cx="993.5" cy="94.1" r="2.5"/><circle cx="1002.5" cy="94.1" r="2.5"/><circle cx="1011.5" cy="94.1" r="2.5"/><circle cx="935" cy="101.9" r="2.5"/><circle cx="944" cy="101.9" r="2.5"/><circle cx="953" cy="101.9" r="2.5"/><circle cx="962" cy="101.9" r="2.5"/><circle cx="971" cy="101.9" r="2.5"/><circle cx="980" cy="101.9" r="2.5"/><circle cx="989" cy="101.9" r="2.5"/><circle cx="998" cy="101.9" r="2.5"/><circle cx="1007" cy="101.9" r="2.5"/><circle cx="939.5" cy="109.7" r="2.5"/><circle cx="948.5" cy="109.7" r="2.5"/><circle cx="957.5" cy="109.7" r="2.5"/><circle cx="966.5" cy="109.7" r="2.5"/><circle cx="975.5" cy="109.7" r="2.5"/><circle cx="984.5" cy="109.7" r="2.5"/><circle cx="993.5" cy="109.7" r="2.5"/><circle cx="1002.5" cy="109.7" r="2.5"/><circle cx="1011.5" cy="109.7" r="2.5"/><circle cx="935" cy="117.5" r="2.5"/><circle cx="944" cy="117.5" r="2.5"/><circle cx="953" cy="117.5" r="2.5"/><circle cx="962" cy="117.5" r="2.5"/><circle cx="971" cy="117.5" r="2.5"/><circle cx="980" cy="117.5" r="2.5"/><circle cx="989" cy="117.5" r="2.5"/><circle cx="998" cy="117.5" r="2.5"/><circle cx="1007" cy="117.5" r="2.5"/><circle cx="930.5" cy="125.3" r="2.5"/><circle cx="939.5" cy="125.3" r="2.5"/><circle cx="948.5" cy="125.3" r="2.5"/><circle cx="957.5" cy="125.3" r="2.5"/><circle cx="966.5" cy="125.3" r="2.5"/><circle cx="975.5" cy="125.3" r="2.5"/><circle cx="984.5" cy="125.3" r="2.5"/><circle cx="993.5" cy="125.3" r="2.5"/><circle cx="1002.5" cy="125.3" r="2.5"/><circle cx="926" cy="133.1" r="2.5"/><circle cx="935" cy="133.1" r="2.5"/><circle cx="944" cy="133.1" r="2.5"/><circle cx="953" cy="133.1" r="2.5"/><circle cx="962" cy="133.1" r="2.5"/><circle cx="971" cy="133.1" r="2.5"/><circle cx="980" cy="133.1" r="2.5"/><circle cx="989" cy="133.1" r="2.5"/><circle cx="998" cy="133.1" r="2.5"/><circle cx="1007" cy="133.1" r="2.5"/><circle cx="921.5" cy="140.9" r="2.5"/><circle cx="930.5" cy="140.9" r="2.5"/><circle cx="939.5" cy="140.9" r="2.5"/><circle cx="948.5" cy="140.9" r="2.5"/><circle cx="957.5" cy="140.9" r="2.5"/><circle cx="966.5" cy="140.9" r="2.5"/><circle cx="975.5" cy="140.9" r="2.5"/><circle cx="984.5" cy="140.9" r="2.5"/><circle cx="993.5" cy="140.9" r="2.5"/><circle cx="926" cy="148.7" r="2.5"/><circle cx="935" cy="148.7" r="2.5"/><circle cx="944" cy="148.7" r="2.5"/><circle cx="953" cy="148.7" r="2.5"/><circle cx="962" cy="148.7" r="2.5"/><circle cx="971" cy="148.7" r="2.5"/><circle cx="980" cy="148.7" r="2.5"/><circle cx="989" cy="148.7" r="2.5"/><circle cx="912.5" cy="156.5" r="2.5"/><circle cx="921.5" cy="156.5" r="2.5"/><circle cx="930.5" cy="156.5" r="2.5"/><circle cx="939.5" cy="156.5" r="2.5"/><circle cx="948.5" cy="156.5" r="2.5"/><circle cx="957.5" cy="156.5" r="2.5"/><circle cx="966.5" cy="156.5" r="2.5"/><circle cx="975.5" cy="156.5" r="2.5"/><circle cx="984.5" cy="156.5" r="2.5"/><circle cx="993.5" cy="156.5" r="2.5"/><circle cx="908" cy="164.3" r="2.5"/><circle cx="917" cy="164.3" r="2.5"/><circle cx="926" cy="164.3" r="2.5"/><circle cx="935" cy="164.3" r="2.5"/><circle cx="944" cy="164.3" r="2.5"/><circle cx="953" cy="164.3" r="2.5"/><circle cx="962" cy="164.3" r="2.5"/><circle cx="971" cy="164.3" r="2.5"/><circle cx="980" cy="164.3" r="2.5"/><circle cx="989" cy="164.3" r="2.5"/><circle cx="426.5" cy="172.1" r="2.5"/><circle cx="912.5" cy="172.1" r="2.5"/><circle cx="921.5" cy="172.1" r="2.5"/><circle cx="930.5" cy="172.1" r="2.5"/><circle cx="939.5" cy="172.1" r="2.5"/><circle cx="948.5" cy="172.1" r="2.5"/><circle cx="957.5" cy="172.1" r="2.5"/><circle cx="966.5" cy="172.1" r="2.5"/><circle cx="975.5" cy="172.1" r="2.5"/><circle cx="368" cy="179.9" r="2.5"/><circle cx="377" cy="179.9" r="2.5"/><circle cx="386" cy="179.9" r="2.5"/><circle cx="395" cy="179.9" r="2.5"/><circle cx="404" cy="179.9" r="2.5"/><circle cx="413" cy="179.9" r="2.5"/><circle cx="422" cy="179.9" r="2.5"/><circle cx="431" cy="179.9" r="2.5"/><circle cx="863" cy="179.9" r="2.5"/><circle cx="908" cy="179.9" r="2.5"/><circle cx="917" cy="179.9" r="2.5"/><circle cx="926" cy="179.9" r="2.5"/><circle cx="935" cy="179.9" r="2.5"/><circle cx="944" cy="179.9" r="2.5"/><circle cx="953" cy="179.9" r="2.5"/><circle cx="962" cy="179.9" r="2.5"/><circle cx="971" cy="179.9" r="2.5"/><circle cx="363.5" cy="187.7" r="2.5"/><circle cx="372.5" cy="187.7" r="2.5"/><circle cx="381.5" cy="187.7" r="2.5"/><circle cx="390.5" cy="187.7" r="2.5"/><circle cx="399.5" cy="187.7" r="2.5"/><circle cx="408.5" cy="187.7" r="2.5"/><circle cx="417.5" cy="187.7" r="2.5"/><circle cx="426.5" cy="187.7" r="2.5"/><circle cx="435.5" cy="187.7" r="2.5"/><circle cx="858.5" cy="187.7" r="2.5"/><circle cx="903.5" cy="187.7" r="2.5"/><circle cx="912.5" cy="187.7" r="2.5"/><circle cx="921.5" cy="187.7" r="2.5"/><circle cx="930.5" cy="187.7" r="2.5"/><circle cx="939.5" cy="187.7" r="2.5"/><circle cx="948.5" cy="187.7" r="2.5"/><circle cx="957.5" cy="187.7" r="2.5"/><circle cx="966.5" cy="187.7" r="2.5"/><circle cx="359" cy="195.5" r="2.5"/><circle cx="368" cy="195.5" r="2.5"/><circle cx="377" cy="195.5" r="2.5"/><circle cx="386" cy="195.5" r="2.5"/><circle cx="395" cy="195.5" r="2.5"/><circle cx="404" cy="195.5" r="2.5"/><circle cx="413" cy="195.5" r="2.5"/><circle cx="422" cy="195.5" r="2.5"/><circle cx="431" cy="195.5" r="2.5"/><circle cx="440" cy="195.5" r="2.5"/><circle cx="863" cy="195.5" r="2.5"/><circle cx="890" cy="195.5" r="2.5"/><circle cx="899" cy="195.5" r="2.5"/><circle cx="908" cy="195.5" r="2.5"/><circle cx="917" cy="195.5" r="2.5"/><circle cx="926" cy="195.5" r="2.5"/><circle cx="935" cy="195.5" r="2.5"/><circle cx="944" cy="195.5" r="2.5"/><circle cx="953" cy="195.5" r="2.5"/><circle cx="962" cy="195.5" r="2.5"/><circle cx="354.5" cy="203.3" r="2.5"/><circle cx="363.5" cy="203.3" r="2.5"/><circle cx="372.5" cy="203.3" r="2.5"/><circle cx="381.5" cy="203.3" r="2.5"/><circle cx="390.5" cy="203.3" r="2.5"/><circle cx="399.5" cy="203.3" r="2.5"/><circle cx="408.5" cy="203.3" r="2.5"/><circle cx="417.5" cy="203.3" r="2.5"/><circle cx="426.5" cy="203.3" r="2.5"/><circle cx="435.5" cy="203.3" r="2.5"/><circle cx="444.5" cy="203.3" r="2.5"/><circle cx="885.5" cy="203.3" r="2.5"/><circle cx="894.5" cy="203.3" r="2.5"/><circle cx="903.5" cy="203.3" r="2.5"/><circle cx="912.5" cy="203.3" r="2.5"/><circle cx="921.5" cy="203.3" r="2.5"/><circle cx="930.5" cy="203.3" r="2.5"/><circle cx="939.5" cy="203.3" r="2.5"/><circle cx="948.5" cy="203.3" r="2.5"/><circle cx="957.5" cy="203.3" r="2.5"/><circle cx="966.5" cy="203.3" r="2.5"/><circle cx="350" cy="211.1" r="2.5"/><circle cx="359" cy="211.1" r="2.5"/><circle cx="368" cy="211.1" r="2.5"/><circle cx="377" cy="211.1" r="2.5"/><circle cx="386" cy="211.1" r="2.5"/><circle cx="395" cy="211.1" r="2.5"/><circle cx="404" cy="211.1" r="2.5"/><circle cx="413" cy="211.1" r="2.5"/><circle cx="422" cy="211.1" r="2.5"/><circle cx="431" cy="211.1" r="2.5"/><circle cx="440" cy="211.1" r="2.5"/><circle cx="449" cy="211.1" r="2.5"/><circle cx="881" cy="211.1" r="2.5"/><circle cx="890" cy="211.1" r="2.5"/><circle cx="899" cy="211.1" r="2.5"/><circle cx="908" cy="211.1" r="2.5"/><circle cx="917" cy="211.1" r="2.5"/><circle cx="926" cy="211.1" r="2.5"/><circle cx="935" cy="211.1" r="2.5"/><circle cx="944" cy="211.1" r="2.5"/><circle cx="953" cy="211.1" r="2.5"/><circle cx="962" cy="211.1" r="2.5"/><circle cx="971" cy="211.1" r="2.5"/><circle cx="354.5" cy="218.9" r="2.5"/><circle cx="363.5" cy="218.9" r="2.5"/><circle cx="372.5" cy="218.9" r="2.5"/><circle cx="381.5" cy="218.9" r="2.5"/><circle cx="390.5" cy="218.9" r="2.5"/><circle cx="399.5" cy="218.9" r="2.5"/><circle cx="408.5" cy="218.9" r="2.5"/><circle cx="417.5" cy="218.9" r="2.5"/><circle cx="426.5" cy="218.9" r="2.5"/><circle cx="435.5" cy="218.9" r="2.5"/><circle cx="444.5" cy="218.9" r="2.5"/><circle cx="453.5" cy="218.9" r="2.5"/><circle cx="534.5" cy="218.9" r="2.5"/><circle cx="876.5" cy="218.9" r="2.5"/><circle cx="885.5" cy="218.9" r="2.5"/><circle cx="894.5" cy="218.9" r="2.5"/><circle cx="903.5" cy="218.9" r="2.5"/><circle cx="912.5" cy="218.9" r="2.5"/><circle cx="921.5" cy="218.9" r="2.5"/><circle cx="930.5" cy="218.9" r="2.5"/><circle cx="939.5" cy="218.9" r="2.5"/><circle cx="948.5" cy="218.9" r="2.5"/><circle cx="957.5" cy="218.9" r="2.5"/><circle cx="966.5" cy="218.9" r="2.5"/><circle cx="359" cy="226.6" r="2.5"/><circle cx="368" cy="226.6" r="2.5"/><circle cx="377" cy="226.6" r="2.5"/><circle cx="386" cy="226.6" r="2.5"/><circle cx="395" cy="226.6" r="2.5"/><circle cx="404" cy="226.6" r="2.5"/><circle cx="413" cy="226.6" r="2.5"/><circle cx="422" cy="226.6" r="2.5"/><circle cx="431" cy="226.6" r="2.5"/><circle cx="440" cy="226.6" r="2.5"/><circle cx="449" cy="226.6" r="2.5"/><circle cx="458" cy="226.6" r="2.5"/><circle cx="800" cy="226.6" r="2.5"/><circle cx="809" cy="226.6" r="2.5"/><circle cx="872" cy="226.6" r="2.5"/><circle cx="881" cy="226.6" r="2.5"/><circle cx="890" cy="226.6" r="2.5"/><circle cx="899" cy="226.6" r="2.5"/><circle cx="908" cy="226.6" r="2.5"/><circle cx="917" cy="226.6" r="2.5"/><circle cx="926" cy="226.6" r="2.5"/><circle cx="935" cy="226.6" r="2.5"/><circle cx="944" cy="226.6" r="2.5"/><circle cx="953" cy="226.6" r="2.5"/><circle cx="962" cy="226.6" r="2.5"/><circle cx="971" cy="226.6" r="2.5"/><circle cx="363.5" cy="234.4" r="2.5"/><circle cx="372.5" cy="234.4" r="2.5"/><circle cx="381.5" cy="234.4" r="2.5"/><circle cx="390.5" cy="234.4" r="2.5"/><circle cx="399.5" cy="234.4" r="2.5"/><circle cx="408.5" cy="234.4" r="2.5"/><circle cx="417.5" cy="234.4" r="2.5"/><circle cx="426.5" cy="234.4" r="2.5"/><circle cx="435.5" cy="234.4" r="2.5"/><circle cx="444.5" cy="234.4" r="2.5"/><circle cx="453.5" cy="234.4" r="2.5"/><circle cx="462.5" cy="234.4" r="2.5"/><circle cx="795.5" cy="234.4" r="2.5"/><circle cx="858.5" cy="234.4" r="2.5"/><circle cx="867.5" cy="234.4" r="2.5"/><circle cx="876.5" cy="234.4" r="2.5"/><circle cx="885.5" cy="234.4" r="2.5"/><circle cx="894.5" cy="234.4" r="2.5"/><circle cx="903.5" cy="234.4" r="2.5"/><circle cx="912.5" cy="234.4" r="2.5"/><circle cx="921.5" cy="234.4" r="2.5"/><circle cx="930.5" cy="234.4" r="2.5"/><circle cx="939.5" cy="234.4" r="2.5"/><circle cx="948.5" cy="234.4" r="2.5"/><circle cx="957.5" cy="234.4" r="2.5"/><circle cx="966.5" cy="234.4" r="2.5"/><circle cx="368" cy="242.2" r="2.5"/><circle cx="377" cy="242.2" r="2.5"/><circle cx="386" cy="242.2" r="2.5"/><circle cx="395" cy="242.2" r="2.5"/><circle cx="404" cy="242.2" r="2.5"/><circle cx="413" cy="242.2" r="2.5"/><circle cx="422" cy="242.2" r="2.5"/><circle cx="431" cy="242.2" r="2.5"/><circle cx="440" cy="242.2" r="2.5"/><circle cx="449" cy="242.2" r="2.5"/><circle cx="458" cy="242.2" r="2.5"/><circle cx="467" cy="242.2" r="2.5"/><circle cx="791" cy="242.2" r="2.5"/><circle cx="845" cy="242.2" r="2.5"/><circle cx="854" cy="242.2" r="2.5"/><circle cx="863" cy="242.2" r="2.5"/><circle cx="872" cy="242.2" r="2.5"/><circle cx="881" cy="242.2" r="2.5"/><circle cx="890" cy="242.2" r="2.5"/><circle cx="899" cy="242.2" r="2.5"/><circle cx="908" cy="242.2" r="2.5"/><circle cx="917" cy="242.2" r="2.5"/><circle cx="926" cy="242.2" r="2.5"/><circle cx="935" cy="242.2" r="2.5"/><circle cx="944" cy="242.2" r="2.5"/><circle cx="953" cy="242.2" r="2.5"/><circle cx="962" cy="242.2" r="2.5"/><circle cx="971" cy="242.2" r="2.5"/><circle cx="345.5" cy="250" r="2.5"/><circle cx="354.5" cy="250" r="2.5"/><circle cx="372.5" cy="250" r="2.5"/><circle cx="381.5" cy="250" r="2.5"/><circle cx="390.5" cy="250" r="2.5"/><circle cx="399.5" cy="250" r="2.5"/><circle cx="408.5" cy="250" r="2.5"/><circle cx="417.5" cy="250" r="2.5"/><circle cx="426.5" cy="250" r="2.5"/><circle cx="435.5" cy="250" r="2.5"/><circle cx="444.5" cy="250" r="2.5"/><circle cx="453.5" cy="250" r="2.5"/><circle cx="462.5" cy="250" r="2.5"/><circle cx="471.5" cy="250" r="2.5"/><circle cx="795.5" cy="250" r="2.5"/><circle cx="822.5" cy="250" r="2.5"/><circle cx="831.5" cy="250" r="2.5"/><circle cx="840.5" cy="250" r="2.5"/><circle cx="849.5" cy="250" r="2.5"/><circle cx="858.5" cy="250" r="2.5"/><circle cx="867.5" cy="250" r="2.5"/><circle cx="876.5" cy="250" r="2.5"/><circle cx="885.5" cy="250" r="2.5"/><circle cx="894.5" cy="250" r="2.5"/><circle cx="903.5" cy="250" r="2.5"/><circle cx="912.5" cy="250" r="2.5"/><circle cx="921.5" cy="250" r="2.5"/><circle cx="930.5" cy="250" r="2.5"/><circle cx="939.5" cy="250" r="2.5"/><circle cx="948.5" cy="250" r="2.5"/><circle cx="957.5" cy="250" r="2.5"/><circle cx="966.5" cy="250" r="2.5"/><circle cx="332" cy="257.8" r="2.5"/><circle cx="341" cy="257.8" r="2.5"/><circle cx="350" cy="257.8" r="2.5"/><circle cx="359" cy="257.8" r="2.5"/><circle cx="368" cy="257.8" r="2.5"/><circle cx="377" cy="257.8" r="2.5"/><circle cx="386" cy="257.8" r="2.5"/><circle cx="395" cy="257.8" r="2.5"/><circle cx="404" cy="257.8" r="2.5"/><circle cx="413" cy="257.8" r="2.5"/><circle cx="422" cy="257.8" r="2.5"/><circle cx="431" cy="257.8" r="2.5"/><circle cx="440" cy="257.8" r="2.5"/><circle cx="449" cy="257.8" r="2.5"/><circle cx="458" cy="257.8" r="2.5"/><circle cx="467" cy="257.8" r="2.5"/><circle cx="791" cy="257.8" r="2.5"/><circle cx="800" cy="257.8" r="2.5"/><circle cx="818" cy="257.8" r="2.5"/><circle cx="827" cy="257.8" r="2.5"/><circle cx="836" cy="257.8" r="2.5"/><circle cx="845" cy="257.8" r="2.5"/><circle cx="854" cy="257.8" r="2.5"/><circle cx="863" cy="257.8" r="2.5"/><circle cx="872" cy="257.8" r="2.5"/><circle cx="881" cy="257.8" r="2.5"/><circle cx="890" cy="257.8" r="2.5"/><circle cx="899" cy="257.8" r="2.5"/><circle cx="908" cy="257.8" r="2.5"/><circle cx="917" cy="257.8" r="2.5"/><circle cx="926" cy="257.8" r="2.5"/><circle cx="935" cy="257.8" r="2.5"/><circle cx="944" cy="257.8" r="2.5"/><circle cx="953" cy="257.8" r="2.5"/><circle cx="354.5" cy="265.6" r="2.5"/><circle cx="363.5" cy="265.6" r="2.5"/><circle cx="372.5" cy="265.6" r="2.5"/><circle cx="381.5" cy="265.6" r="2.5"/><circle cx="390.5" cy="265.6" r="2.5"/><circle cx="399.5" cy="265.6" r="2.5"/><circle cx="408.5" cy="265.6" r="2.5"/><circle cx="417.5" cy="265.6" r="2.5"/><circle cx="426.5" cy="265.6" r="2.5"/><circle cx="435.5" cy="265.6" r="2.5"/><circle cx="444.5" cy="265.6" r="2.5"/><circle cx="453.5" cy="265.6" r="2.5"/><circle cx="462.5" cy="265.6" r="2.5"/><circle cx="471.5" cy="265.6" r="2.5"/><circle cx="786.5" cy="265.6" r="2.5"/><circle cx="795.5" cy="265.6" r="2.5"/><circle cx="804.5" cy="265.6" r="2.5"/><circle cx="813.5" cy="265.6" r="2.5"/><circle cx="822.5" cy="265.6" r="2.5"/><circle cx="831.5" cy="265.6" r="2.5"/><circle cx="840.5" cy="265.6" r="2.5"/><circle cx="849.5" cy="265.6" r="2.5"/><circle cx="858.5" cy="265.6" r="2.5"/><circle cx="867.5" cy="265.6" r="2.5"/><circle cx="876.5" cy="265.6" r="2.5"/><circle cx="885.5" cy="265.6" r="2.5"/><circle cx="894.5" cy="265.6" r="2.5"/><circle cx="903.5" cy="265.6" r="2.5"/><circle cx="912.5" cy="265.6" r="2.5"/><circle cx="921.5" cy="265.6" r="2.5"/><circle cx="930.5" cy="265.6" r="2.5"/><circle cx="939.5" cy="265.6" r="2.5"/><circle cx="948.5" cy="265.6" r="2.5"/><circle cx="957.5" cy="265.6" r="2.5"/><circle cx="341" cy="273.4" r="2.5"/><circle cx="350" cy="273.4" r="2.5"/><circle cx="359" cy="273.4" r="2.5"/><circle cx="368" cy="273.4" r="2.5"/><circle cx="377" cy="273.4" r="2.5"/><circle cx="386" cy="273.4" r="2.5"/><circle cx="395" cy="273.4" r="2.5"/><circle cx="404" cy="273.4" r="2.5"/><circle cx="413" cy="273.4" r="2.5"/><circle cx="422" cy="273.4" r="2.5"/><circle cx="431" cy="273.4" r="2.5"/><circle cx="440" cy="273.4" r="2.5"/><circle cx="449" cy="273.4" r="2.5"/><circle cx="458" cy="273.4" r="2.5"/><circle cx="467" cy="273.4" r="2.5"/><circle cx="782" cy="273.4" r="2.5"/><circle cx="791" cy="273.4" r="2.5"/><circle cx="800" cy="273.4" r="2.5"/><circle cx="809" cy="273.4" r="2.5"/><circle cx="818" cy="273.4" r="2.5"/><circle cx="827" cy="273.4" r="2.5"/><circle cx="836" cy="273.4" r="2.5"/><circle cx="845" cy="273.4" r="2.5"/><circle cx="854" cy="273.4" r="2.5"/><circle cx="863" cy="273.4" r="2.5"/><circle cx="872" cy="273.4" r="2.5"/><circle cx="881" cy="273.4" r="2.5"/><circle cx="890" cy="273.4" r="2.5"/><circle cx="899" cy="273.4" r="2.5"/><circle cx="908" cy="273.4" r="2.5"/><circle cx="917" cy="273.4" r="2.5"/><circle cx="926" cy="273.4" r="2.5"/><circle cx="935" cy="273.4" r="2.5"/><circle cx="944" cy="273.4" r="2.5"/><circle cx="953" cy="273.4" r="2.5"/><circle cx="354.5" cy="281.2" r="2.5"/><circle cx="363.5" cy="281.2" r="2.5"/><circle cx="372.5" cy="281.2" r="2.5"/><circle cx="381.5" cy="281.2" r="2.5"/><circle cx="390.5" cy="281.2" r="2.5"/><circle cx="399.5" cy="281.2" r="2.5"/><circle cx="408.5" cy="281.2" r="2.5"/><circle cx="417.5" cy="281.2" r="2.5"/><circle cx="426.5" cy="281.2" r="2.5"/><circle cx="435.5" cy="281.2" r="2.5"/><circle cx="444.5" cy="281.2" r="2.5"/><circle cx="453.5" cy="281.2" r="2.5"/><circle cx="462.5" cy="281.2" r="2.5"/><circle cx="777.5" cy="281.2" r="2.5"/><circle cx="786.5" cy="281.2" r="2.5"/><circle cx="795.5" cy="281.2" r="2.5"/><circle cx="804.5" cy="281.2" r="2.5"/><circle cx="813.5" cy="281.2" r="2.5"/><circle cx="822.5" cy="281.2" r="2.5"/><circle cx="831.5" cy="281.2" r="2.5"/><circle cx="840.5" cy="281.2" r="2.5"/><circle cx="849.5" cy="281.2" r="2.5"/><circle cx="858.5" cy="281.2" r="2.5"/><circle cx="867.5" cy="281.2" r="2.5"/><circle cx="876.5" cy="281.2" r="2.5"/><circle cx="885.5" cy="281.2" r="2.5"/><circle cx="894.5" cy="281.2" r="2.5"/><circle cx="903.5" cy="281.2" r="2.5"/><circle cx="912.5" cy="281.2" r="2.5"/><circle cx="921.5" cy="281.2" r="2.5"/><circle cx="930.5" cy="281.2" r="2.5"/><circle cx="939.5" cy="281.2" r="2.5"/><circle cx="948.5" cy="281.2" r="2.5"/><circle cx="350" cy="289" r="2.5"/><circle cx="359" cy="289" r="2.5"/><circle cx="368" cy="289" r="2.5"/><circle cx="377" cy="289" r="2.5"/><circle cx="386" cy="289" r="2.5"/><circle cx="395" cy="289" r="2.5"/><circle cx="404" cy="289" r="2.5"/><circle cx="413" cy="289" r="2.5"/><circle cx="422" cy="289" r="2.5"/><circle cx="431" cy="289" r="2.5"/><circle cx="440" cy="289" r="2.5"/><circle cx="449" cy="289" r="2.5"/><circle cx="458" cy="289" r="2.5"/><circle cx="467" cy="289" r="2.5"/><circle cx="638" cy="289" r="2.5"/><circle cx="764" cy="289" r="2.5"/><circle cx="773" cy="289" r="2.5"/><circle cx="782" cy="289" r="2.5"/><circle cx="791" cy="289" r="2.5"/><circle cx="800" cy="289" r="2.5"/><circle cx="809" cy="289" r="2.5"/><circle cx="818" cy="289" r="2.5"/><circle cx="827" cy="289" r="2.5"/><circle cx="836" cy="289" r="2.5"/><circle cx="845" cy="289" r="2.5"/><circle cx="854" cy="289" r="2.5"/><circle cx="863" cy="289" r="2.5"/><circle cx="872" cy="289" r="2.5"/><circle cx="881" cy="289" r="2.5"/><circle cx="890" cy="289" r="2.5"/><circle cx="899" cy="289" r="2.5"/><circle cx="908" cy="289" r="2.5"/><circle cx="917" cy="289" r="2.5"/><circle cx="926" cy="289" r="2.5"/><circle cx="935" cy="289" r="2.5"/><circle cx="944" cy="289" r="2.5"/><circle cx="953" cy="289" r="2.5"/><circle cx="354.5" cy="296.8" r="2.5"/><circle cx="363.5" cy="296.8" r="2.5"/><circle cx="372.5" cy="296.8" r="2.5"/><circle cx="381.5" cy="296.8" r="2.5"/><circle cx="390.5" cy="296.8" r="2.5"/><circle cx="399.5" cy="296.8" r="2.5"/><circle cx="408.5" cy="296.8" r="2.5"/><circle cx="417.5" cy="296.8" r="2.5"/><circle cx="426.5" cy="296.8" r="2.5"/><circle cx="435.5" cy="296.8" r="2.5"/><circle cx="444.5" cy="296.8" r="2.5"/><circle cx="453.5" cy="296.8" r="2.5"/><circle cx="462.5" cy="296.8" r="2.5"/><circle cx="759.5" cy="296.8" r="2.5"/><circle cx="768.5" cy="296.8" r="2.5"/><circle cx="777.5" cy="296.8" r="2.5"/><circle cx="786.5" cy="296.8" r="2.5"/><circle cx="795.5" cy="296.8" r="2.5"/><circle cx="804.5" cy="296.8" r="2.5"/><circle cx="813.5" cy="296.8" r="2.5"/><circle cx="822.5" cy="296.8" r="2.5"/><circle cx="831.5" cy="296.8" r="2.5"/><circle cx="840.5" cy="296.8" r="2.5"/><circle cx="849.5" cy="296.8" r="2.5"/><circle cx="858.5" cy="296.8" r="2.5"/><circle cx="867.5" cy="296.8" r="2.5"/><circle cx="876.5" cy="296.8" r="2.5"/><circle cx="885.5" cy="296.8" r="2.5"/><circle cx="894.5" cy="296.8" r="2.5"/><circle cx="903.5" cy="296.8" r="2.5"/><circle cx="912.5" cy="296.8" r="2.5"/><circle cx="921.5" cy="296.8" r="2.5"/><circle cx="930.5" cy="296.8" r="2.5"/><circle cx="939.5" cy="296.8" r="2.5"/><circle cx="948.5" cy="296.8" r="2.5"/><circle cx="359" cy="304.6" r="2.5"/><circle cx="368" cy="304.6" r="2.5"/><circle cx="377" cy="304.6" r="2.5"/><circle cx="386" cy="304.6" r="2.5"/><circle cx="395" cy="304.6" r="2.5"/><circle cx="404" cy="304.6" r="2.5"/><circle cx="413" cy="304.6" r="2.5"/><circle cx="422" cy="304.6" r="2.5"/><circle cx="431" cy="304.6" r="2.5"/><circle cx="440" cy="304.6" r="2.5"/><circle cx="449" cy="304.6" r="2.5"/><circle cx="458" cy="304.6" r="2.5"/><circle cx="467" cy="304.6" r="2.5"/><circle cx="476" cy="304.6" r="2.5"/><circle cx="764" cy="304.6" r="2.5"/><circle cx="773" cy="304.6" r="2.5"/><circle cx="782" cy="304.6" r="2.5"/><circle cx="791" cy="304.6" r="2.5"/><circle cx="800" cy="304.6" r="2.5"/><circle cx="809" cy="304.6" r="2.5"/><circle cx="818" cy="304.6" r="2.5"/><circle cx="827" cy="304.6" r="2.5"/><circle cx="836" cy="304.6" r="2.5"/><circle cx="845" cy="304.6" r="2.5"/><circle cx="854" cy="304.6" r="2.5"/><circle cx="863" cy="304.6" r="2.5"/><circle cx="872" cy="304.6" r="2.5"/><circle cx="881" cy="304.6" r="2.5"/><circle cx="890" cy="304.6" r="2.5"/><circle cx="899" cy="304.6" r="2.5"/><circle cx="908" cy="304.6" r="2.5"/><circle cx="917" cy="304.6" r="2.5"/><circle cx="926" cy="304.6" r="2.5"/><circle cx="935" cy="304.6" r="2.5"/><circle cx="944" cy="304.6" r="2.5"/><circle cx="953" cy="304.6" r="2.5"/><circle cx="363.5" cy="312.4" r="2.5"/><circle cx="372.5" cy="312.4" r="2.5"/><circle cx="381.5" cy="312.4" r="2.5"/><circle cx="390.5" cy="312.4" r="2.5"/><circle cx="399.5" cy="312.4" r="2.5"/><circle cx="408.5" cy="312.4" r="2.5"/><circle cx="417.5" cy="312.4" r="2.5"/><circle cx="426.5" cy="312.4" r="2.5"/><circle cx="435.5" cy="312.4" r="2.5"/><circle cx="444.5" cy="312.4" r="2.5"/><circle cx="453.5" cy="312.4" r="2.5"/><circle cx="462.5" cy="312.4" r="2.5"/><circle cx="471.5" cy="312.4" r="2.5"/><circle cx="768.5" cy="312.4" r="2.5"/><circle cx="777.5" cy="312.4" r="2.5"/><circle cx="786.5" cy="312.4" r="2.5"/><circle cx="795.5" cy="312.4" r="2.5"/><circle cx="804.5" cy="312.4" r="2.5"/><circle cx="813.5" cy="312.4" r="2.5"/><circle cx="822.5" cy="312.4" r="2.5"/><circle cx="831.5" cy="312.4" r="2.5"/><circle cx="840.5" cy="312.4" r="2.5"/><circle cx="849.5" cy="312.4" r="2.5"/><circle cx="858.5" cy="312.4" r="2.5"/><circle cx="867.5" cy="312.4" r="2.5"/><circle cx="876.5" cy="312.4" r="2.5"/><circle cx="885.5" cy="312.4" r="2.5"/><circle cx="894.5" cy="312.4" r="2.5"/><circle cx="903.5" cy="312.4" r="2.5"/><circle cx="912.5" cy="312.4" r="2.5"/><circle cx="921.5" cy="312.4" r="2.5"/><circle cx="930.5" cy="312.4" r="2.5"/><circle cx="939.5" cy="312.4" r="2.5"/><circle cx="948.5" cy="312.4" r="2.5"/><circle cx="957.5" cy="312.4" r="2.5"/><circle cx="350" cy="320.2" r="2.5"/><circle cx="359" cy="320.2" r="2.5"/><circle cx="368" cy="320.2" r="2.5"/><circle cx="377" cy="320.2" r="2.5"/><circle cx="386" cy="320.2" r="2.5"/><circle cx="395" cy="320.2" r="2.5"/><circle cx="404" cy="320.2" r="2.5"/><circle cx="413" cy="320.2" r="2.5"/><circle cx="422" cy="320.2" r="2.5"/><circle cx="431" cy="320.2" r="2.5"/><circle cx="440" cy="320.2" r="2.5"/><circle cx="449" cy="320.2" r="2.5"/><circle cx="458" cy="320.2" r="2.5"/><circle cx="467" cy="320.2" r="2.5"/><circle cx="692" cy="320.2" r="2.5"/><circle cx="701" cy="320.2" r="2.5"/><circle cx="710" cy="320.2" r="2.5"/><circle cx="719" cy="320.2" r="2.5"/><circle cx="755" cy="320.2" r="2.5"/><circle cx="764" cy="320.2" r="2.5"/><circle cx="773" cy="320.2" r="2.5"/><circle cx="782" cy="320.2" r="2.5"/><circle cx="791" cy="320.2" r="2.5"/><circle cx="800" cy="320.2" r="2.5"/><circle cx="809" cy="320.2" r="2.5"/><circle cx="818" cy="320.2" r="2.5"/><circle cx="827" cy="320.2" r="2.5"/><circle cx="836" cy="320.2" r="2.5"/><circle cx="845" cy="320.2" r="2.5"/><circle cx="854" cy="320.2" r="2.5"/><circle cx="863" cy="320.2" r="2.5"/><circle cx="872" cy="320.2" r="2.5"/><circle cx="881" cy="320.2" r="2.5"/><circle cx="890" cy="320.2" r="2.5"/><circle cx="899" cy="320.2" r="2.5"/><circle cx="908" cy="320.2" r="2.5"/><circle cx="917" cy="320.2" r="2.5"/><circle cx="935" cy="320.2" r="2.5"/><circle cx="944" cy="320.2" r="2.5"/><circle cx="953" cy="320.2" r="2.5"/><circle cx="345.5" cy="328" r="2.5"/><circle cx="354.5" cy="328" r="2.5"/><circle cx="363.5" cy="328" r="2.5"/><circle cx="372.5" cy="328" r="2.5"/><circle cx="381.5" cy="328" r="2.5"/><circle cx="390.5" cy="328" r="2.5"/><circle cx="399.5" cy="328" r="2.5"/><circle cx="408.5" cy="328" r="2.5"/><circle cx="417.5" cy="328" r="2.5"/><circle cx="426.5" cy="328" r="2.5"/><circle cx="435.5" cy="328" r="2.5"/><circle cx="444.5" cy="328" r="2.5"/><circle cx="453.5" cy="328" r="2.5"/><circle cx="462.5" cy="328" r="2.5"/><circle cx="624.5" cy="328" r="2.5"/><circle cx="633.5" cy="328" r="2.5"/><circle cx="651.5" cy="328" r="2.5"/><circle cx="660.5" cy="328" r="2.5"/><circle cx="669.5" cy="328" r="2.5"/><circle cx="678.5" cy="328" r="2.5"/><circle cx="687.5" cy="328" r="2.5"/><circle cx="696.5" cy="328" r="2.5"/><circle cx="705.5" cy="328" r="2.5"/><circle cx="714.5" cy="328" r="2.5"/><circle cx="723.5" cy="328" r="2.5"/><circle cx="732.5" cy="328" r="2.5"/><circle cx="741.5" cy="328" r="2.5"/><circle cx="750.5" cy="328" r="2.5"/><circle cx="759.5" cy="328" r="2.5"/><circle cx="768.5" cy="328" r="2.5"/><circle cx="777.5" cy="328" r="2.5"/><circle cx="786.5" cy="328" r="2.5"/><circle cx="795.5" cy="328" r="2.5"/><circle cx="804.5" cy="328" r="2.5"/><circle cx="813.5" cy="328" r="2.5"/><circle cx="822.5" cy="328" r="2.5"/><circle cx="831.5" cy="328" r="2.5"/><circle cx="840.5" cy="328" r="2.5"/><circle cx="849.5" cy="328" r="2.5"/><circle cx="858.5" cy="328" r="2.5"/><circle cx="867.5" cy="328" r="2.5"/><circle cx="876.5" cy="328" r="2.5"/><circle cx="885.5" cy="328" r="2.5"/><circle cx="894.5" cy="328" r="2.5"/><circle cx="903.5" cy="328" r="2.5"/><circle cx="912.5" cy="328" r="2.5"/><circle cx="930.5" cy="328" r="2.5"/><circle cx="939.5" cy="328" r="2.5"/><circle cx="350" cy="335.8" r="2.5"/><circle cx="359" cy="335.8" r="2.5"/><circle cx="368" cy="335.8" r="2.5"/><circle cx="377" cy="335.8" r="2.5"/><circle cx="386" cy="335.8" r="2.5"/><circle cx="395" cy="335.8" r="2.5"/><circle cx="404" cy="335.8" r="2.5"/><circle cx="413" cy="335.8" r="2.5"/><circle cx="422" cy="335.8" r="2.5"/><circle cx="431" cy="335.8" r="2.5"/><circle cx="440" cy="335.8" r="2.5"/><circle cx="449" cy="335.8" r="2.5"/><circle cx="458" cy="335.8" r="2.5"/><circle cx="467" cy="335.8" r="2.5"/><circle cx="611" cy="335.8" r="2.5"/><circle cx="620" cy="335.8" r="2.5"/><circle cx="629" cy="335.8" r="2.5"/><circle cx="638" cy="335.8" r="2.5"/><circle cx="647" cy="335.8" r="2.5"/><circle cx="656" cy="335.8" r="2.5"/><circle cx="665" cy="335.8" r="2.5"/><circle cx="674" cy="335.8" r="2.5"/><circle cx="683" cy="335.8" r="2.5"/><circle cx="692" cy="335.8" r="2.5"/><circle cx="701" cy="335.8" r="2.5"/><circle cx="710" cy="335.8" r="2.5"/><circle cx="719" cy="335.8" r="2.5"/><circle cx="728" cy="335.8" r="2.5"/><circle cx="737" cy="335.8" r="2.5"/><circle cx="746" cy="335.8" r="2.5"/><circle cx="755" cy="335.8" r="2.5"/><circle cx="764" cy="335.8" r="2.5"/><circle cx="773" cy="335.8" r="2.5"/><circle cx="782" cy="335.8" r="2.5"/><circle cx="791" cy="335.8" r="2.5"/><circle cx="800" cy="335.8" r="2.5"/><circle cx="809" cy="335.8" r="2.5"/><circle cx="818" cy="335.8" r="2.5"/><circle cx="827" cy="335.8" r="2.5"/><circle cx="836" cy="335.8" r="2.5"/><circle cx="845" cy="335.8" r="2.5"/><circle cx="854" cy="335.8" r="2.5"/><circle cx="863" cy="335.8" r="2.5"/><circle cx="872" cy="335.8" r="2.5"/><circle cx="881" cy="335.8" r="2.5"/><circle cx="890" cy="335.8" r="2.5"/><circle cx="899" cy="335.8" r="2.5"/><circle cx="908" cy="335.8" r="2.5"/><circle cx="926" cy="335.8" r="2.5"/><circle cx="935" cy="335.8" r="2.5"/><circle cx="944" cy="335.8" r="2.5"/><circle cx="345.5" cy="343.6" r="2.5"/><circle cx="354.5" cy="343.6" r="2.5"/><circle cx="363.5" cy="343.6" r="2.5"/><circle cx="372.5" cy="343.6" r="2.5"/><circle cx="381.5" cy="343.6" r="2.5"/><circle cx="390.5" cy="343.6" r="2.5"/><circle cx="399.5" cy="343.6" r="2.5"/><circle cx="408.5" cy="343.6" r="2.5"/><circle cx="417.5" cy="343.6" r="2.5"/><circle cx="426.5" cy="343.6" r="2.5"/><circle cx="435.5" cy="343.6" r="2.5"/><circle cx="444.5" cy="343.6" r="2.5"/><circle cx="453.5" cy="343.6" r="2.5"/><circle cx="462.5" cy="343.6" r="2.5"/><circle cx="606.5" cy="343.6" r="2.5"/><circle cx="615.5" cy="343.6" r="2.5"/><circle cx="624.5" cy="343.6" r="2.5"/><circle cx="633.5" cy="343.6" r="2.5"/><circle cx="642.5" cy="343.6" r="2.5"/><circle cx="651.5" cy="343.6" r="2.5"/><circle cx="660.5" cy="343.6" r="2.5"/><circle cx="669.5" cy="343.6" r="2.5"/><circle cx="678.5" cy="343.6" r="2.5"/><circle cx="687.5" cy="343.6" r="2.5"/><circle cx="696.5" cy="343.6" r="2.5"/><circle cx="705.5" cy="343.6" r="2.5"/><circle cx="714.5" cy="343.6" r="2.5"/><circle cx="723.5" cy="343.6" r="2.5"/><circle cx="732.5" cy="343.6" r="2.5"/><circle cx="741.5" cy="343.6" r="2.5"/><circle cx="750.5" cy="343.6" r="2.5"/><circle cx="759.5" cy="343.6" r="2.5"/><circle cx="768.5" cy="343.6" r="2.5"/><circle cx="777.5" cy="343.6" r="2.5"/><circle cx="786.5" cy="343.6" r="2.5"/><circle cx="795.5" cy="343.6" r="2.5"/><circle cx="804.5" cy="343.6" r="2.5"/><circle cx="813.5" cy="343.6" r="2.5"/><circle cx="822.5" cy="343.6" r="2.5"/><circle cx="831.5" cy="343.6" r="2.5"/><circle cx="840.5" cy="343.6" r="2.5"/><circle cx="849.5" cy="343.6" r="2.5"/><circle cx="858.5" cy="343.6" r="2.5"/><circle cx="867.5" cy="343.6" r="2.5"/><circle cx="876.5" cy="343.6" r="2.5"/><circle cx="885.5" cy="343.6" r="2.5"/><circle cx="912.5" cy="343.6" r="2.5"/><circle cx="930.5" cy="343.6" r="2.5"/><circle cx="939.5" cy="343.6" r="2.5"/><circle cx="341" cy="351.4" r="2.5"/><circle cx="350" cy="351.4" r="2.5"/><circle cx="359" cy="351.4" r="2.5"/><circle cx="368" cy="351.4" r="2.5"/><circle cx="377" cy="351.4" r="2.5"/><circle cx="386" cy="351.4" r="2.5"/><circle cx="395" cy="351.4" r="2.5"/><circle cx="404" cy="351.4" r="2.5"/><circle cx="413" cy="351.4" r="2.5"/><circle cx="422" cy="351.4" r="2.5"/><circle cx="602" cy="351.4" r="2.5"/><circle cx="611" cy="351.4" r="2.5"/><circle cx="620" cy="351.4" r="2.5"/><circle cx="629" cy="351.4" r="2.5"/><circle cx="638" cy="351.4" r="2.5"/><circle cx="647" cy="351.4" r="2.5"/><circle cx="656" cy="351.4" r="2.5"/><circle cx="665" cy="351.4" r="2.5"/><circle cx="674" cy="351.4" r="2.5"/><circle cx="683" cy="351.4" r="2.5"/><circle cx="692" cy="351.4" r="2.5"/><circle cx="701" cy="351.4" r="2.5"/><circle cx="710" cy="351.4" r="2.5"/><circle cx="719" cy="351.4" r="2.5"/><circle cx="728" cy="351.4" r="2.5"/><circle cx="737" cy="351.4" r="2.5"/><circle cx="746" cy="351.4" r="2.5"/><circle cx="755" cy="351.4" r="2.5"/><circle cx="764" cy="351.4" r="2.5"/><circle cx="773" cy="351.4" r="2.5"/><circle cx="782" cy="351.4" r="2.5"/><circle cx="800" cy="351.4" r="2.5"/><circle cx="809" cy="351.4" r="2.5"/><circle cx="818" cy="351.4" r="2.5"/><circle cx="827" cy="351.4" r="2.5"/><circle cx="836" cy="351.4" r="2.5"/><circle cx="845" cy="351.4" r="2.5"/><circle cx="854" cy="351.4" r="2.5"/><circle cx="863" cy="351.4" r="2.5"/><circle cx="881" cy="351.4" r="2.5"/><circle cx="890" cy="351.4" r="2.5"/><circle cx="926" cy="351.4" r="2.5"/><circle cx="327.5" cy="359.2" r="2.5"/><circle cx="345.5" cy="359.2" r="2.5"/><circle cx="354.5" cy="359.2" r="2.5"/><circle cx="363.5" cy="359.2" r="2.5"/><circle cx="372.5" cy="359.2" r="2.5"/><circle cx="381.5" cy="359.2" r="2.5"/><circle cx="390.5" cy="359.2" r="2.5"/><circle cx="408.5" cy="359.2" r="2.5"/><circle cx="426.5" cy="359.2" r="2.5"/><circle cx="435.5" cy="359.2" r="2.5"/><circle cx="588.5" cy="359.2" r="2.5"/><circle cx="597.5" cy="359.2" r="2.5"/><circle cx="606.5" cy="359.2" r="2.5"/><circle cx="615.5" cy="359.2" r="2.5"/><circle cx="624.5" cy="359.2" r="2.5"/><circle cx="633.5" cy="359.2" r="2.5"/><circle cx="642.5" cy="359.2" r="2.5"/><circle cx="651.5" cy="359.2" r="2.5"/><circle cx="660.5" cy="359.2" r="2.5"/><circle cx="669.5" cy="359.2" r="2.5"/><circle cx="678.5" cy="359.2" r="2.5"/><circle cx="687.5" cy="359.2" r="2.5"/><circle cx="696.5" cy="359.2" r="2.5"/><circle cx="705.5" cy="359.2" r="2.5"/><circle cx="714.5" cy="359.2" r="2.5"/><circle cx="723.5" cy="359.2" r="2.5"/><circle cx="732.5" cy="359.2" r="2.5"/><circle cx="741.5" cy="359.2" r="2.5"/><circle cx="750.5" cy="359.2" r="2.5"/><circle cx="759.5" cy="359.2" r="2.5"/><circle cx="768.5" cy="359.2" r="2.5"/><circle cx="777.5" cy="359.2" r="2.5"/><circle cx="795.5" cy="359.2" r="2.5"/><circle cx="804.5" cy="359.2" r="2.5"/><circle cx="813.5" cy="359.2" r="2.5"/><circle cx="822.5" cy="359.2" r="2.5"/><circle cx="831.5" cy="359.2" r="2.5"/><circle cx="840.5" cy="359.2" r="2.5"/><circle cx="849.5" cy="359.2" r="2.5"/><circle cx="858.5" cy="359.2" r="2.5"/><circle cx="885.5" cy="359.2" r="2.5"/><circle cx="350" cy="366.9" r="2.5"/><circle cx="359" cy="366.9" r="2.5"/><circle cx="368" cy="366.9" r="2.5"/><circle cx="395" cy="366.9" r="2.5"/><circle cx="413" cy="366.9" r="2.5"/><circle cx="584" cy="366.9" r="2.5"/><circle cx="593" cy="366.9" r="2.5"/><circle cx="602" cy="366.9" r="2.5"/><circle cx="611" cy="366.9" r="2.5"/><circle cx="620" cy="366.9" r="2.5"/><circle cx="629" cy="366.9" r="2.5"/><circle cx="638" cy="366.9" r="2.5"/><circle cx="647" cy="366.9" r="2.5"/><circle cx="656" cy="366.9" r="2.5"/><circle cx="665" cy="366.9" r="2.5"/><circle cx="674" cy="366.9" r="2.5"/><circle cx="683" cy="366.9" r="2.5"/><circle cx="710" cy="366.9" r="2.5"/><circle cx="719" cy="366.9" r="2.5"/><circle cx="728" cy="366.9" r="2.5"/><circle cx="737" cy="366.9" r="2.5"/><circle cx="746" cy="366.9" r="2.5"/><circle cx="755" cy="366.9" r="2.5"/><circle cx="764" cy="366.9" r="2.5"/><circle cx="773" cy="366.9" r="2.5"/><circle cx="818" cy="366.9" r="2.5"/><circle cx="827" cy="366.9" r="2.5"/><circle cx="836" cy="366.9" r="2.5"/><circle cx="845" cy="366.9" r="2.5"/><circle cx="881" cy="366.9" r="2.5"/><circle cx="345.5" cy="374.7" r="2.5"/><circle cx="354.5" cy="374.7" r="2.5"/><circle cx="363.5" cy="374.7" r="2.5"/><circle cx="381.5" cy="374.7" r="2.5"/><circle cx="471.5" cy="374.7" r="2.5"/><circle cx="570.5" cy="374.7" r="2.5"/><circle cx="579.5" cy="374.7" r="2.5"/><circle cx="588.5" cy="374.7" r="2.5"/><circle cx="597.5" cy="374.7" r="2.5"/><circle cx="606.5" cy="374.7" r="2.5"/><circle cx="615.5" cy="374.7" r="2.5"/><circle cx="624.5" cy="374.7" r="2.5"/><circle cx="633.5" cy="374.7" r="2.5"/><circle cx="642.5" cy="374.7" r="2.5"/><circle cx="651.5" cy="374.7" r="2.5"/><circle cx="660.5" cy="374.7" r="2.5"/><circle cx="669.5" cy="374.7" r="2.5"/><circle cx="732.5" cy="374.7" r="2.5"/><circle cx="741.5" cy="374.7" r="2.5"/><circle cx="750.5" cy="374.7" r="2.5"/><circle cx="759.5" cy="374.7" r="2.5"/><circle cx="768.5" cy="374.7" r="2.5"/><circle cx="777.5" cy="374.7" r="2.5"/><circle cx="332" cy="382.5" r="2.5"/><circle cx="350" cy="382.5" r="2.5"/><circle cx="467" cy="382.5" r="2.5"/><circle cx="557" cy="382.5" r="2.5"/><circle cx="566" cy="382.5" r="2.5"/><circle cx="575" cy="382.5" r="2.5"/><circle cx="584" cy="382.5" r="2.5"/><circle cx="593" cy="382.5" r="2.5"/><circle cx="602" cy="382.5" r="2.5"/><circle cx="611" cy="382.5" r="2.5"/><circle cx="620" cy="382.5" r="2.5"/><circle cx="629" cy="382.5" r="2.5"/><circle cx="638" cy="382.5" r="2.5"/><circle cx="647" cy="382.5" r="2.5"/><circle cx="728" cy="382.5" r="2.5"/><circle cx="737" cy="382.5" r="2.5"/><circle cx="746" cy="382.5" r="2.5"/><circle cx="755" cy="382.5" r="2.5"/><circle cx="764" cy="382.5" r="2.5"/><circle cx="773" cy="382.5" r="2.5"/><circle cx="782" cy="382.5" r="2.5"/><circle cx="791" cy="382.5" r="2.5"/><circle cx="129.5" cy="390.3" r="2.5"/><circle cx="543.5" cy="390.3" r="2.5"/><circle cx="552.5" cy="390.3" r="2.5"/><circle cx="561.5" cy="390.3" r="2.5"/><circle cx="570.5" cy="390.3" r="2.5"/><circle cx="579.5" cy="390.3" r="2.5"/><circle cx="588.5" cy="390.3" r="2.5"/><circle cx="606.5" cy="390.3" r="2.5"/><circle cx="615.5" cy="390.3" r="2.5"/><circle cx="669.5" cy="390.3" r="2.5"/><circle cx="678.5" cy="390.3" r="2.5"/><circle cx="705.5" cy="390.3" r="2.5"/><circle cx="723.5" cy="390.3" r="2.5"/><circle cx="732.5" cy="390.3" r="2.5"/><circle cx="741.5" cy="390.3" r="2.5"/><circle cx="750.5" cy="390.3" r="2.5"/><circle cx="759.5" cy="390.3" r="2.5"/><circle cx="768.5" cy="390.3" r="2.5"/><circle cx="777.5" cy="390.3" r="2.5"/><circle cx="786.5" cy="390.3" r="2.5"/><circle cx="116" cy="398.1" r="2.5"/><circle cx="125" cy="398.1" r="2.5"/><circle cx="134" cy="398.1" r="2.5"/><circle cx="143" cy="398.1" r="2.5"/><circle cx="539" cy="398.1" r="2.5"/><circle cx="548" cy="398.1" r="2.5"/><circle cx="557" cy="398.1" r="2.5"/><circle cx="566" cy="398.1" r="2.5"/><circle cx="575" cy="398.1" r="2.5"/><circle cx="584" cy="398.1" r="2.5"/><circle cx="656" cy="398.1" r="2.5"/><circle cx="665" cy="398.1" r="2.5"/><circle cx="674" cy="398.1" r="2.5"/><circle cx="683" cy="398.1" r="2.5"/><circle cx="692" cy="398.1" r="2.5"/><circle cx="719" cy="398.1" r="2.5"/><circle cx="728" cy="398.1" r="2.5"/><circle cx="737" cy="398.1" r="2.5"/><circle cx="746" cy="398.1" r="2.5"/><circle cx="755" cy="398.1" r="2.5"/><circle cx="764" cy="398.1" r="2.5"/><circle cx="111.5" cy="405.9" r="2.5"/><circle cx="120.5" cy="405.9" r="2.5"/><circle cx="129.5" cy="405.9" r="2.5"/><circle cx="138.5" cy="405.9" r="2.5"/><circle cx="552.5" cy="405.9" r="2.5"/><circle cx="579.5" cy="405.9" r="2.5"/><circle cx="588.5" cy="405.9" r="2.5"/><circle cx="624.5" cy="405.9" r="2.5"/><circle cx="651.5" cy="405.9" r="2.5"/><circle cx="660.5" cy="405.9" r="2.5"/><circle cx="669.5" cy="405.9" r="2.5"/><circle cx="678.5" cy="405.9" r="2.5"/><circle cx="687.5" cy="405.9" r="2.5"/><circle cx="696.5" cy="405.9" r="2.5"/><circle cx="723.5" cy="405.9" r="2.5"/><circle cx="732.5" cy="405.9" r="2.5"/><circle cx="741.5" cy="405.9" r="2.5"/><circle cx="750.5" cy="405.9" r="2.5"/><circle cx="759.5" cy="405.9" r="2.5"/><circle cx="107" cy="413.7" r="2.5"/><circle cx="116" cy="413.7" r="2.5"/><circle cx="125" cy="413.7" r="2.5"/><circle cx="134" cy="413.7" r="2.5"/><circle cx="143" cy="413.7" r="2.5"/><circle cx="485" cy="413.7" r="2.5"/><circle cx="521" cy="413.7" r="2.5"/><circle cx="530" cy="413.7" r="2.5"/><circle cx="620" cy="413.7" r="2.5"/><circle cx="629" cy="413.7" r="2.5"/><circle cx="638" cy="413.7" r="2.5"/><circle cx="647" cy="413.7" r="2.5"/><circle cx="656" cy="413.7" r="2.5"/><circle cx="665" cy="413.7" r="2.5"/><circle cx="674" cy="413.7" r="2.5"/><circle cx="683" cy="413.7" r="2.5"/><circle cx="692" cy="413.7" r="2.5"/><circle cx="728" cy="413.7" r="2.5"/><circle cx="737" cy="413.7" r="2.5"/><circle cx="746" cy="413.7" r="2.5"/><circle cx="755" cy="413.7" r="2.5"/><circle cx="102.5" cy="421.5" r="2.5"/><circle cx="111.5" cy="421.5" r="2.5"/><circle cx="120.5" cy="421.5" r="2.5"/><circle cx="129.5" cy="421.5" r="2.5"/><circle cx="138.5" cy="421.5" r="2.5"/><circle cx="516.5" cy="421.5" r="2.5"/><circle cx="525.5" cy="421.5" r="2.5"/><circle cx="534.5" cy="421.5" r="2.5"/><circle cx="615.5" cy="421.5" r="2.5"/><circle cx="624.5" cy="421.5" r="2.5"/><circle cx="633.5" cy="421.5" r="2.5"/><circle cx="642.5" cy="421.5" r="2.5"/><circle cx="651.5" cy="421.5" r="2.5"/><circle cx="660.5" cy="421.5" r="2.5"/><circle cx="669.5" cy="421.5" r="2.5"/><circle cx="678.5" cy="421.5" r="2.5"/><circle cx="687.5" cy="421.5" r="2.5"/><circle cx="732.5" cy="421.5" r="2.5"/><circle cx="741.5" cy="421.5" r="2.5"/><circle cx="750.5" cy="421.5" r="2.5"/><circle cx="98" cy="429.3" r="2.5"/><circle cx="107" cy="429.3" r="2.5"/><circle cx="116" cy="429.3" r="2.5"/><circle cx="125" cy="429.3" r="2.5"/><circle cx="134" cy="429.3" r="2.5"/><circle cx="359" cy="429.3" r="2.5"/><circle cx="503" cy="429.3" r="2.5"/><circle cx="512" cy="429.3" r="2.5"/><circle cx="521" cy="429.3" r="2.5"/><circle cx="530" cy="429.3" r="2.5"/><circle cx="539" cy="429.3" r="2.5"/><circle cx="548" cy="429.3" r="2.5"/><circle cx="557" cy="429.3" r="2.5"/><circle cx="566" cy="429.3" r="2.5"/><circle cx="602" cy="429.3" r="2.5"/><circle cx="611" cy="429.3" r="2.5"/><circle cx="620" cy="429.3" r="2.5"/><circle cx="629" cy="429.3" r="2.5"/><circle cx="638" cy="429.3" r="2.5"/><circle cx="647" cy="429.3" r="2.5"/><circle cx="656" cy="429.3" r="2.5"/><circle cx="665" cy="429.3" r="2.5"/><circle cx="674" cy="429.3" r="2.5"/><circle cx="683" cy="429.3" r="2.5"/><circle cx="737" cy="429.3" r="2.5"/><circle cx="746" cy="429.3" r="2.5"/><circle cx="93.5" cy="437.1" r="2.5"/><circle cx="102.5" cy="437.1" r="2.5"/><circle cx="111.5" cy="437.1" r="2.5"/><circle cx="120.5" cy="437.1" r="2.5"/><circle cx="129.5" cy="437.1" r="2.5"/><circle cx="138.5" cy="437.1" r="2.5"/><circle cx="336.5" cy="437.1" r="2.5"/><circle cx="345.5" cy="437.1" r="2.5"/><circle cx="354.5" cy="437.1" r="2.5"/><circle cx="498.5" cy="437.1" r="2.5"/><circle cx="507.5" cy="437.1" r="2.5"/><circle cx="516.5" cy="437.1" r="2.5"/><circle cx="525.5" cy="437.1" r="2.5"/><circle cx="534.5" cy="437.1" r="2.5"/><circle cx="543.5" cy="437.1" r="2.5"/><circle cx="552.5" cy="437.1" r="2.5"/><circle cx="561.5" cy="437.1" r="2.5"/><circle cx="588.5" cy="437.1" r="2.5"/><circle cx="606.5" cy="437.1" r="2.5"/><circle cx="615.5" cy="437.1" r="2.5"/><circle cx="624.5" cy="437.1" r="2.5"/><circle cx="633.5" cy="437.1" r="2.5"/><circle cx="678.5" cy="437.1" r="2.5"/><circle cx="89" cy="444.9" r="2.5"/><circle cx="98" cy="444.9" r="2.5"/><circle cx="107" cy="444.9" r="2.5"/><circle cx="116" cy="444.9" r="2.5"/><circle cx="125" cy="444.9" r="2.5"/><circle cx="134" cy="444.9" r="2.5"/><circle cx="341" cy="444.9" r="2.5"/><circle cx="485" cy="444.9" r="2.5"/><circle cx="494" cy="444.9" r="2.5"/><circle cx="503" cy="444.9" r="2.5"/><circle cx="512" cy="444.9" r="2.5"/><circle cx="521" cy="444.9" r="2.5"/><circle cx="530" cy="444.9" r="2.5"/><circle cx="539" cy="444.9" r="2.5"/><circle cx="548" cy="444.9" r="2.5"/><circle cx="557" cy="444.9" r="2.5"/><circle cx="566" cy="444.9" r="2.5"/><circle cx="575" cy="444.9" r="2.5"/><circle cx="611" cy="444.9" r="2.5"/><circle cx="620" cy="444.9" r="2.5"/><circle cx="629" cy="444.9" r="2.5"/><circle cx="84.5" cy="452.7" r="2.5"/><circle cx="93.5" cy="452.7" r="2.5"/><circle cx="102.5" cy="452.7" r="2.5"/><circle cx="111.5" cy="452.7" r="2.5"/><circle cx="120.5" cy="452.7" r="2.5"/><circle cx="129.5" cy="452.7" r="2.5"/><circle cx="489.5" cy="452.7" r="2.5"/><circle cx="498.5" cy="452.7" r="2.5"/><circle cx="516.5" cy="452.7" r="2.5"/><circle cx="525.5" cy="452.7" r="2.5"/><circle cx="534.5" cy="452.7" r="2.5"/><circle cx="543.5" cy="452.7" r="2.5"/><circle cx="552.5" cy="452.7" r="2.5"/><circle cx="561.5" cy="452.7" r="2.5"/><circle cx="570.5" cy="452.7" r="2.5"/><circle cx="606.5" cy="452.7" r="2.5"/><circle cx="615.5" cy="452.7" r="2.5"/><circle cx="624.5" cy="452.7" r="2.5"/><circle cx="921.5" cy="452.7" r="2.5"/><circle cx="80" cy="460.5" r="2.5"/><circle cx="89" cy="460.5" r="2.5"/><circle cx="98" cy="460.5" r="2.5"/><circle cx="107" cy="460.5" r="2.5"/><circle cx="116" cy="460.5" r="2.5"/><circle cx="125" cy="460.5" r="2.5"/><circle cx="458" cy="460.5" r="2.5"/><circle cx="485" cy="460.5" r="2.5"/><circle cx="503" cy="460.5" r="2.5"/><circle cx="521" cy="460.5" r="2.5"/><circle cx="530" cy="460.5" r="2.5"/><circle cx="539" cy="460.5" r="2.5"/><circle cx="548" cy="460.5" r="2.5"/><circle cx="557" cy="460.5" r="2.5"/><circle cx="566" cy="460.5" r="2.5"/><circle cx="575" cy="460.5" r="2.5"/><circle cx="611" cy="460.5" r="2.5"/><circle cx="620" cy="460.5" r="2.5"/><circle cx="75.5" cy="468.3" r="2.5"/><circle cx="84.5" cy="468.3" r="2.5"/><circle cx="93.5" cy="468.3" r="2.5"/><circle cx="102.5" cy="468.3" r="2.5"/><circle cx="111.5" cy="468.3" r="2.5"/><circle cx="120.5" cy="468.3" r="2.5"/><circle cx="129.5" cy="468.3" r="2.5"/><circle cx="489.5" cy="468.3" r="2.5"/><circle cx="498.5" cy="468.3" r="2.5"/><circle cx="507.5" cy="468.3" r="2.5"/><circle cx="525.5" cy="468.3" r="2.5"/><circle cx="534.5" cy="468.3" r="2.5"/><circle cx="543.5" cy="468.3" r="2.5"/><circle cx="552.5" cy="468.3" r="2.5"/><circle cx="561.5" cy="468.3" r="2.5"/><circle cx="570.5" cy="468.3" r="2.5"/><circle cx="579.5" cy="468.3" r="2.5"/><circle cx="615.5" cy="468.3" r="2.5"/><circle cx="80" cy="476.1" r="2.5"/><circle cx="89" cy="476.1" r="2.5"/><circle cx="98" cy="476.1" r="2.5"/><circle cx="107" cy="476.1" r="2.5"/><circle cx="116" cy="476.1" r="2.5"/><circle cx="125" cy="476.1" r="2.5"/><circle cx="440" cy="476.1" r="2.5"/><circle cx="521" cy="476.1" r="2.5"/><circle cx="530" cy="476.1" r="2.5"/><circle cx="539" cy="476.1" r="2.5"/><circle cx="548" cy="476.1" r="2.5"/><circle cx="557" cy="476.1" r="2.5"/><circle cx="566" cy="476.1" r="2.5"/><circle cx="75.5" cy="483.9" r="2.5"/><circle cx="84.5" cy="483.9" r="2.5"/><circle cx="93.5" cy="483.9" r="2.5"/><circle cx="102.5" cy="483.9" r="2.5"/><circle cx="111.5" cy="483.9" r="2.5"/><circle cx="120.5" cy="483.9" r="2.5"/><circle cx="498.5" cy="483.9" r="2.5"/><circle cx="525.5" cy="483.9" r="2.5"/><circle cx="534.5" cy="483.9" r="2.5"/><circle cx="543.5" cy="483.9" r="2.5"/><circle cx="552.5" cy="483.9" r="2.5"/><circle cx="561.5" cy="483.9" r="2.5"/><circle cx="71" cy="491.7" r="2.5"/><circle cx="80" cy="491.7" r="2.5"/><circle cx="89" cy="491.7" r="2.5"/><circle cx="98" cy="491.7" r="2.5"/><circle cx="107" cy="491.7" r="2.5"/><circle cx="116" cy="491.7" r="2.5"/><circle cx="503" cy="491.7" r="2.5"/><circle cx="521" cy="491.7" r="2.5"/><circle cx="530" cy="491.7" r="2.5"/><circle cx="539" cy="491.7" r="2.5"/><circle cx="548" cy="491.7" r="2.5"/><circle cx="557" cy="491.7" r="2.5"/><circle cx="566" cy="491.7" r="2.5"/><circle cx="75.5" cy="499.4" r="2.5"/><circle cx="84.5" cy="499.4" r="2.5"/><circle cx="93.5" cy="499.4" r="2.5"/><circle cx="102.5" cy="499.4" r="2.5"/><circle cx="111.5" cy="499.4" r="2.5"/><circle cx="516.5" cy="499.4" r="2.5"/><circle cx="525.5" cy="499.4" r="2.5"/><circle cx="534.5" cy="499.4" r="2.5"/><circle cx="543.5" cy="499.4" r="2.5"/><circle cx="552.5" cy="499.4" r="2.5"/><circle cx="561.5" cy="499.4" r="2.5"/><circle cx="80" cy="507.2" r="2.5"/><circle cx="89" cy="507.2" r="2.5"/><circle cx="98" cy="507.2" r="2.5"/><circle cx="107" cy="507.2" r="2.5"/><circle cx="512" cy="507.2" r="2.5"/><circle cx="521" cy="507.2" r="2.5"/><circle cx="530" cy="507.2" r="2.5"/><circle cx="539" cy="507.2" r="2.5"/><circle cx="548" cy="507.2" r="2.5"/><circle cx="557" cy="507.2" r="2.5"/><circle cx="84.5" cy="515" r="2.5"/><circle cx="93.5" cy="515" r="2.5"/><circle cx="102.5" cy="515" r="2.5"/><circle cx="507.5" cy="515" r="2.5"/><circle cx="516.5" cy="515" r="2.5"/><circle cx="525.5" cy="515" r="2.5"/><circle cx="534.5" cy="515" r="2.5"/><circle cx="543.5" cy="515" r="2.5"/><circle cx="552.5" cy="515" r="2.5"/><circle cx="89" cy="522.8" r="2.5"/><circle cx="98" cy="522.8" r="2.5"/><circle cx="485" cy="522.8" r="2.5"/><circle cx="512" cy="522.8" r="2.5"/><circle cx="521" cy="522.8" r="2.5"/><circle cx="530" cy="522.8" r="2.5"/><circle cx="539" cy="522.8" r="2.5"/><circle cx="548" cy="522.8" r="2.5"/><circle cx="557" cy="522.8" r="2.5"/><circle cx="93.5" cy="530.6" r="2.5"/><circle cx="102.5" cy="530.6" r="2.5"/><circle cx="516.5" cy="530.6" r="2.5"/><circle cx="534.5" cy="530.6" r="2.5"/><circle cx="543.5" cy="530.6" r="2.5"/><circle cx="552.5" cy="530.6" r="2.5"/><circle cx="98" cy="538.4" r="2.5"/><circle cx="512" cy="538.4" r="2.5"/><circle cx="530" cy="538.4" r="2.5"/><circle cx="539" cy="538.4" r="2.5"/><circle cx="516.5" cy="546.2" r="2.5"/><circle cx="534.5" cy="546.2" r="2.5"/><circle cx="543.5" cy="546.2" r="2.5"/><circle cx="530" cy="554" r="2.5"/></g>
+
+        <!-- 국가 라벨 -->
+        <text class="t-country" x="235" y="272" text-anchor="middle">KOREA</text>
+        <text class="t-country t-japan" x="1095" y="105" text-anchor="middle">JAPAN</text>
+
+        <!-- 항로 아크: 울산 허브 -> 타이베이 / 후쿠오카 -> 오사카 -> 도쿄, 울산 -> 서울 -->
+        <path id="arcK" class="arc arc-main" d="M 467.2 324.6 Q 300 445 132.8 399.1" pathLength="1"/>
+        <path id="arcJ" class="arc" d="M 467.2 324.6 Q 461 388 514.3 426.7" pathLength="1"/>
+        <path class="arc" d="M 514.3 426.7 Q 625 440 734.5 369.2" pathLength="1"/>
+        <path class="arc" d="M 734.5 369.2 Q 833 393 913.6 317.3" pathLength="1"/>
+        <path class="arc arc-sub" d="M 467.2 324.6 Q 438 253 366.5 215.6" pathLength="1"/>
+
+        <!-- 이동 펄스 -->
+        <circle class="pulse-dot" r="3.5" fill="#D9A04C" opacity="0">
+          <animateMotion id="amK" dur="3.2s" repeatCount="indefinite" begin="indefinite" rotate="0">
+            <mpath href="#arcK"/>
+          </animateMotion>
+          <animate attributeName="opacity" values="0;.9;.9;0" keyTimes="0;.1;.85;1" dur="3.2s" repeatCount="indefinite" begin="indefinite" data-follow="amK"/>
+        </circle>
+        <circle class="pulse-dot" r="3.5" fill="#D9A04C" opacity="0">
+          <animateMotion id="amJ" dur="3.2s" repeatCount="indefinite" begin="indefinite" rotate="0">
+            <mpath href="#arcJ"/>
+          </animateMotion>
+          <animate attributeName="opacity" values="0;.9;.9;0" keyTimes="0;.1;.85;1" dur="3.2s" repeatCount="indefinite" begin="indefinite" data-follow="amJ"/>
+        </circle>
+
+        <!-- ULSAN — 운영 허브 -->
+        <g>
+          <circle cx="467.2" cy="324.6" r="56" fill="url(#hubGlow)"/>
+          <circle cx="467.2" cy="324.6" r="9" fill="none" stroke="#D9A04C" stroke-width="1.5"/>
+          <circle cx="467.2" cy="324.6" r="3.5" fill="#D9A04C"/>
+          <circle cx="467.2" cy="324.6" r="9" fill="none" stroke="#D9A04C" stroke-width="1">
+            <animate attributeName="r" values="9;28" dur="2.6s" repeatCount="indefinite" begin="indefinite" data-hub="1"/>
+            <animate attributeName="opacity" values=".5;0" dur="2.6s" repeatCount="indefinite" begin="indefinite" data-hub="1"/>
+          </circle>
+          <text class="t-city" x="487" y="321" text-anchor="start">ULSAN</text>
+          <text class="t-csub amber" x="487" y="338" text-anchor="start">OPERATION HUB</text>
+        </g>
+
+        <!-- TAIPEI — 대만 거점 -->
+        <g>
+          <circle cx="132.8" cy="399.1" r="7" fill="none" stroke="#D9A04C" stroke-width="1.5"/>
+          <circle cx="132.8" cy="399.1" r="2.6" fill="#D9A04C"/>
+          <text class="t-city" x="72" y="580" text-anchor="start">TAIPEI</text>
+          <text class="t-csub amber" x="72" y="597" text-anchor="start">TAIWAN BASE</text>
+        </g>
+
+        <!-- SEOUL -->
+        <g>
+          <circle cx="366.5" cy="215.6" r="5.5" fill="none" stroke="#5B8FC7" stroke-width="1.2"/>
+          <circle cx="366.5" cy="215.6" r="2.2" fill="#5B8FC7"/>
+          <text class="t-city" x="351" y="210" text-anchor="end">SEOUL</text>
+        </g>
+
+        <!-- FUKUOKA -->
+        <g>
+          <circle cx="514.3" cy="426.7" r="5.5" fill="none" stroke="#5B8FC7" stroke-width="1.2"/>
+          <circle cx="514.3" cy="426.7" r="2.2" fill="#5B8FC7"/>
+          <text class="t-city" x="502" y="452" text-anchor="end">FUKUOKA</text>
+        </g>
+
+        <!-- OSAKA -->
+        <g>
+          <circle cx="734.5" cy="369.2" r="5.5" fill="none" stroke="#5B8FC7" stroke-width="1.2"/>
+          <circle cx="734.5" cy="369.2" r="2.2" fill="#5B8FC7"/>
+          <text class="t-city" x="746" y="397" text-anchor="start">OSAKA</text>
+        </g>
+
+        <!-- TOKYO -->
+        <g>
+          <circle cx="913.6" cy="317.3" r="5.5" fill="none" stroke="#5B8FC7" stroke-width="1.2"/>
+          <circle cx="913.6" cy="317.3" r="2.2" fill="#5B8FC7"/>
+          <text class="t-city" x="929" y="313" text-anchor="start">TOKYO</text>
+        </g>
+
+        <!-- 범례 (남쪽 바다 여백) -->
+        <g class="legend">
+          <text class="t-cap" x="960" y="500" text-anchor="start">H&amp;C ASIA IB NETWORK</text>
+          <circle cx="966" cy="528" r="4" fill="#D9A04C"/>
+          <text class="t-leg" x="980" y="532" text-anchor="start">HUB · BASE</text>
+          <circle cx="966" cy="554" r="4" fill="#5B8FC7"/>
+          <text class="t-leg" x="980" y="558" text-anchor="start">NETWORK CITY</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="net-cards">
+      <article class="net-card reveal">
+        <div class="country"><span class="en">Korea</span><span class="role">Ulsan · Hub</span></div>
+        <p class="kr-role">메인 허브 — 울산 · 서울</p>
+        <ul>
+          <li><b>울산</b> 메인 허브 · <b>서울</b> 서브 거점</li>
+          <li><b>① 병행수입</b> — 빠른 시장 진입 · 초기 인지도 확보 · 시장 테스트</li>
+          <li><b>② 정식수입</b> — 신규 수입법인 설립 또는 기존 수입사와 전략적 협업</li>
+        </ul>
+      </article>
+      <article class="net-card reveal" style="--d:.08s">
+        <div class="country"><span class="en">Taiwan</span><span class="role">Taipei · Base</span></div>
+        <p class="kr-role">운영 거점 — 타이베이</p>
+        <ul>
+          <li><b>타이베이</b>를 중심으로 한 운영 거점</li>
+          <li>현지 수입사 협력 — <b>B2B + B2C</b> 유통 동시 운영</li>
+          <li>안정적인 유통 · 물류 인프라, IB 출시의 중심 거점</li>
+        </ul>
+      </article>
+      <article class="net-card reveal" style="--d:.16s">
+        <div class="country"><span class="en">Japan</span><span class="role">Fukuoka · Osaka · Tokyo</span></div>
+        <p class="kr-role">파트너십 네트워크 — 후쿠오카 · 오사카 · 도쿄</p>
+        <ul>
+          <li><b>후쿠오카 · 오사카 · 도쿄</b>를 중심으로 BAR 파트너 확대</li>
+          <li>공동 프로젝트 및 독점 IB 출시</li>
+          <li>일본 유통 네트워크 구축</li>
+        </ul>
+      </article>
+    </div>
+    </div>
+
+    <p class="net-note reveal">향후 <b>공동 Store Pick 프로젝트</b>, <b>독점 제품 출시</b>,
+    <b>아시아 BAR 공급망 구축</b>으로 3개국 중심의 아시아 IB 네트워크를 확대해 나갑니다.</p>
+  </div>
+</section>
+
+<!-- ==================== STRENGTHS ==================== -->
+<section id="strengths" class="band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Why H&amp;C</p>
+      <h2 class="sec-title">Core Strengths</h2>
+      <p class="sec-sub">H&amp;C가 아시아 위스키 시장에서 가지는 핵심 경쟁력입니다.</p>
+    </div>
+    <div class="str-grid">
+      <div class="str-item reveal"><span class="no">01</span>
+        <p class="txt">글로벌 네트워크 기반의 IB 소싱 능력</p></div>
+      <div class="str-item reveal" style="--d:.06s"><span class="no">02</span>
+        <p class="txt">대만 중심의 안정적인 유통 · 물류 인프라</p></div>
+      <div class="str-item reveal" style="--d:.12s"><span class="no">03</span>
+        <p class="txt">한국 · 일본 시장 동시 확장이 가능한 사업 구조</p></div>
+      <div class="str-item reveal" style="--d:.18s"><span class="no">04</span>
+        <p class="txt">소규모 조직 기반의 빠른 의사결정과 실행력</p></div>
+      <div class="str-item reveal" style="--d:.24s"><span class="no">05</span>
+        <p class="txt">제품 기획부터 출시까지 가능한 통합 IB 컨설팅</p></div>
+      <div class="str-item reveal" style="--d:.3s"><span class="no">06</span>
+        <p class="txt">브랜드 중심의 장기 성장 전략</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LEADERSHIP ==================== -->
+<section id="leadership">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Leadership</p>
+      <h2 class="sec-title">Lean &amp; High-Efficiency</h2>
+      <p class="sec-sub">직접 계약하고, 직접 운영하는 두 명의 대표가 이끕니다.</p>
+    </div>
+    <div class="lead-grid">
+      <article class="lead-card reveal">
+        <div class="lead-top">
+          <div class="monogram">S</div>
+          <div>
+            <h3 class="lead-name">신현철</h3>
+            <p class="lead-role">Co-CEO — Global</p>
+          </div>
+        </div>
+        <ul>
+          <li>글로벌 계약 및 전략적 파트너십 총괄</li>
+          <li>Independent Bottling 프로젝트 기획</li>
+          <li>MR.SHIN 브랜드 전략 수립</li>
+        </ul>
+      </article>
+      <article class="lead-card reveal" style="--d:.1s">
+        <div class="lead-top">
+          <div class="monogram">O</div>
+          <div>
+            <h3 class="lead-name">오정현</h3>
+            <p class="lead-role">Co-CEO — Korea</p>
+          </div>
+        </div>
+        <ul>
+          <li>한국 BAR 운영 및 유통 총괄</li>
+          <li>캐스크 기획 및 투자</li>
+          <li>한국 시장 전략 수립</li>
+        </ul>
+      </article>
+    </div>
+    <div class="org-note reveal">
+      <span class="badge">4 Members</span>
+      <span>Lean &amp; High-Efficiency Organization — 소규모 조직 기반의 빠른 의사결정과 실행력이 H&amp;C의 방식입니다.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ROADMAP ==================== -->
+<section id="roadmap" class="band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Roadmap</p>
+      <h2 class="sec-title">The Road Ahead</h2>
+      <p class="sec-sub">아시아 대표 IB 브랜드로 가는 길을 단계적으로 실행합니다.</p>
+    </div>
+    <div class="road-grid">
+      <div class="road-col now reveal">
+        <span class="road-term">Short-Term</span>
+        <p class="road-year num">2026</p>
+        <ul>
+          <li>일본 시장 진출 확대</li>
+          <li>한국 파트너사 확대</li>
+          <li>IB 라인업 최대 8종 구축</li>
+          <li>아시아 BAR 네트워크 강화</li>
+        </ul>
+      </div>
+      <div class="road-col reveal" style="--d:.1s">
+        <span class="road-term">Mid-Term</span>
+        <p class="road-year">중기</p>
+        <ul>
+          <li>한국 정식 수입 체계 구축</li>
+          <li>아시아 주요 시장 유통망 확대</li>
+          <li>MR.SHIN 브랜드 인지도 강화</li>
+        </ul>
+      </div>
+      <div class="road-col reveal" style="--d:.2s">
+        <span class="road-term">Long-Term</span>
+        <p class="road-year">장기</p>
+        <ul>
+          <li>글로벌 Independent Bottling 브랜드로 성장</li>
+          <li>독점 캐스크 확보</li>
+          <li>브랜드 자산 가치 확대</li>
+          <li>아시아 대표 IB 브랜드로 자리매김</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== VISION ==================== -->
+<section id="vision">
+  <div class="wrap">
+    <h2 class="eyebrow reveal">Vision</h2>
+    <p class="vision-quote reveal" style="--d:.1s">
+      한국과 대만, 일본을 연결하고,<br>
+      아시아 시장을 선도하는 <em>글로벌 IB 브랜드</em>로 성장합니다.
+    </p>
+    <p class="vision-body reveal" style="--d:.22s">
+      H&amp;C International은 Independent Bottling, 글로벌 유통, 물류 서비스,
+      그리고 브랜드 컨설팅을 하나의 플랫폼으로 통합한
+      아시아 기반의 하이브리드 위스키 기업입니다.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact" class="band">
+  <div class="wrap">
+    <div class="box reveal">
+      <div class="sec-head">
+        <p class="eyebrow">Contact</p>
+        <h2 class="sec-title">Partner with H&amp;C</h2>
+        <p class="sec-sub">아시아 위스키 시장을 함께 열어갈 파트너를 찾습니다.
+        IB 협업, 수입 · 유통, 물류, 캐스크 컨설팅 — 어떤 주제든 좋습니다.</p>
+        <div class="contact-topics">
+          <span class="chip neutral">IB 공동 프로젝트</span>
+          <span class="chip neutral">수입 · 유통 제휴</span>
+          <span class="chip neutral">물류 서비스</span>
+          <span class="chip neutral">캐스크 컨설팅</span>
+        </div>
+      </div>
+      <div class="contact-right">
+        <a class="btn btn-primary" href="https://open.kakao.com/o/sxoePtnh" target="_blank" rel="noopener">카카오톡으로 문의하기</a>
+        <a class="btn btn-ghost num" href="tel:010-8438-5527">전화 문의 · 010-8438-5527</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <p class="mark">H<span>&amp;</span>C <span style="font-size:14px;color:var(--ink-55)">INTERNATIONAL</span></p>
+        <p class="desc">Independent Bottling · Import &amp; Distribution · Logistics · IB Consulting을 통합한 아시아 기반 하이브리드 위스키 기업</p>
+      </div>
+      <div class="foot-col">
+        <h3>Brands</h3>
+        <ul>
+          <li>MR.SHIN</li>
+          <li>Whisky Lab</li>
+          <li>House Cask</li>
+          <li>IOLYT</li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h3>Sitemap</h3>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#business">Business</a></li>
+          <li><a href="#brands">Brands</a></li>
+          <li><a href="#network">Network</a></li>
+          <li><a href="#roadmap">Roadmap</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h3>Presence</h3>
+        <ul>
+          <li>Korea — Ulsan · Seoul</li>
+          <li>Taiwan — Taipei</li>
+          <li>Japan — Fukuoka · Osaka · Tokyo</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 H&amp;C International (MR.SHIN). All rights reserved.</span>
+      <span class="proto">Prototype v1.0 — 2026.08</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- Reveal on scroll ---------- */
+var revealEls = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+var pendingReveal = [];
+function markIn(el){
+  el.classList.add("in");
+  var i = pendingReveal.indexOf(el);
+  if (i > -1) pendingReveal.splice(i, 1);
+}
+if ("IntersectionObserver" in window && !reduceMotion) {
+  pendingReveal = revealEls.slice();
+  var ro = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      /* isIntersecting: 정상 진입 / top<0: 빠른 점프로 지나친 요소 구제 */
+      if (e.isIntersecting || e.boundingClientRect.top < 0) {
+        markIn(e.target); ro.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+  revealEls.forEach(function(el){ ro.observe(el); });
+} else {
+  revealEls.forEach(function(el){ el.classList.add("in"); });
+}
+/* 점프 스크롤로 IO 콜백이 누락된 요소 스윕 (rAF 스크롤 핸들러에서 호출) */
+function sweepReveals(){
+  if (!pendingReveal.length) return;
+  var vh = window.innerHeight;
+  for (var i = pendingReveal.length - 1; i >= 0; i--) {
+    var rect = pendingReveal[i].getBoundingClientRect();
+    if (rect.top < vh * 0.95) markIn(pendingReveal[i]);
+  }
+}
+
+/* ---------- Nav: scrolled state + progress bar ---------- */
+var nav = document.getElementById("nav");
+var progress = document.getElementById("progress");
+var ticking = false;
+function onScroll(){
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(function(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    nav.classList.toggle("scrolled", y > 24);
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = "scaleX(" + (h > 0 ? Math.min(y / h, 1) : 0) + ")";
+    sweepReveals();
+    ticking = false;
+  });
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+/* ---------- Nav: active link ---------- */
+var links = Array.prototype.slice.call(document.querySelectorAll(".nav-links a[href^='#']"))
+  .filter(function(a){ return !a.classList.contains("nav-cta"); });
+var sectionsById = {};
+links.forEach(function(a){
+  var sec = document.querySelector(a.getAttribute("href"));
+  if (sec) sectionsById[sec.id] = a;
+});
+if ("IntersectionObserver" in window) {
+  var so = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        links.forEach(function(a){ a.classList.remove("active"); });
+        var link = sectionsById[e.target.id];
+        if (link) link.classList.add("active");
+      }
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  Object.keys(sectionsById).forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) so.observe(el);
+  });
+}
+
+/* ---------- Mobile nav ---------- */
+var toggle = document.getElementById("navToggle");
+var navLinks = document.getElementById("navLinks");
+toggle.addEventListener("click", function(){
+  var open = navLinks.classList.toggle("open");
+  toggle.classList.toggle("open", open);
+  toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  toggle.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
+});
+navLinks.addEventListener("click", function(e){
+  if (e.target.tagName === "A") {
+    navLinks.classList.remove("open");
+    toggle.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+});
+document.addEventListener("keydown", function(e){
+  if (e.key === "Escape" && navLinks.classList.contains("open")) {
+    navLinks.classList.remove("open");
+    toggle.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.focus();
+  }
+});
+
+/* ---------- Count-up stats ---------- */
+function countUp(el){
+  var target = parseInt(el.getAttribute("data-count"), 10);
+  if (reduceMotion) { el.textContent = target; return; }
+  var dur = 1100, start = null;
+  function tick(ts){
+    if (!start) start = ts;
+    var p = Math.min((ts - start) / dur, 1);
+    var eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(eased * target);
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+var counters = Array.prototype.slice.call(document.querySelectorAll("[data-count]"));
+if ("IntersectionObserver" in window) {
+  var co = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { countUp(e.target); co.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(function(el){ co.observe(el); });
+} else {
+  counters.forEach(function(el){ el.textContent = el.getAttribute("data-count"); });
+}
+
+/* ---------- Network map: draw arcs + start SMIL on reveal ---------- */
+var netmap = document.getElementById("netmap");
+if (netmap) {
+  var arcs = Array.prototype.slice.call(netmap.querySelectorAll(".arc"));
+  arcs.forEach(function(p){
+    p.style.strokeDasharray = "1";
+    p.style.strokeDashoffset = "1";
+  });
+  var started = false;
+  function startMap(){
+    if (started) return;
+    started = true;
+    netmap.classList.remove("map-pre");
+    arcs.forEach(function(p, i){
+      p.style.transition = "stroke-dashoffset 1.4s " + (i * 0.25) + "s cubic-bezier(.4,0,.2,1)";
+      requestAnimationFrame(function(){ p.style.strokeDashoffset = "0"; });
+    });
+    if (!reduceMotion) {
+      var beginGroup = function(id){
+        try {
+          var am = document.getElementById(id);
+          if (am && am.beginElement) am.beginElement();
+          Array.prototype.slice.call(netmap.querySelectorAll("animate[data-follow='" + id + "']")).forEach(function(a){
+            if (a.beginElement) a.beginElement();
+          });
+        } catch (err) { /* SMIL 미지원 환경 무시 */ }
+      };
+      beginGroup("amK");
+      setTimeout(function(){ beginGroup("amJ"); }, 1700);
+      try {
+        Array.prototype.slice.call(netmap.querySelectorAll("animate[data-hub]")).forEach(function(a){
+          if (a.beginElement) a.beginElement();
+        });
+      } catch (err) { /* SMIL 미지원 환경 무시 */ }
+    }
+  }
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    netmap.classList.add("map-pre"); /* 지형 도트는 리빌 시점에 페이드 인 */
+    var mo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { startMap(); mo.disconnect(); }
+      });
+    }, { threshold: 0.25 });
+    mo.observe(netmap);
+  } else {
+    arcs.forEach(function(p){ p.style.strokeDashoffset = "0"; });
+  }
+}
+
+/* ---------- Hero embers (canvas) ---------- */
+var canvas = document.getElementById("embers");
+if (canvas && !reduceMotion) {
+  var ctx = canvas.getContext("2d");
+  var hero = document.getElementById("hero");
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var W = 0, H = 0, parts = [], running = false, rafId = null;
+
+  function resize(){
+    W = hero.clientWidth; H = hero.clientHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    canvas.style.width = W + "px"; canvas.style.height = H + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function spawn(init){
+    return {
+      x: Math.random() * W,
+      y: init ? Math.random() * H : H + 10,
+      r: 0.8 + Math.random() * 1.6,
+      vy: 0.12 + Math.random() * 0.3,
+      vx: (Math.random() - 0.5) * 0.12,
+      a: 0.04 + Math.random() * 0.13,
+      ph: Math.random() * Math.PI * 2
+    };
+  }
+  function initParts(){
+    var n = Math.round(Math.min(W, 1400) / 38); /* ≈ 폭 1120에서 30개 */
+    parts = [];
+    for (var i = 0; i < n; i++) parts.push(spawn(true));
+  }
+  function frame(){
+    if (!running) return;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      p.y -= p.vy;
+      p.x += p.vx + Math.sin(p.ph + p.y * 0.008) * 0.08;
+      if (p.y < -12 || p.x < -12 || p.x > W + 12) parts[i] = spawn(false);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(217,160,76," + p.a + ")";
+      ctx.fill();
+    }
+    rafId = requestAnimationFrame(frame);
+  }
+  function setRunning(on){
+    if (on && !running) { running = true; rafId = requestAnimationFrame(frame); }
+    else if (!on && running) { running = false; if (rafId) cancelAnimationFrame(rafId); }
+  }
+  resize(); initParts();
+  window.addEventListener("resize", function(){
+    /* 모바일 주소창 개폐 등 치수가 실제로 안 변한 resize에서는 파티클 유지 */
+    if (hero.clientWidth === W && hero.clientHeight === H) return;
+    resize(); initParts();
+  });
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function(entries){
+      setRunning(entries[0].isIntersecting && !document.hidden);
+    }, { threshold: 0.02 }).observe(hero);
+  } else { setRunning(true); }
+  document.addEventListener("visibilitychange", function(){
+    if (document.hidden) setRunning(false);
+    else {
+      var r = hero.getBoundingClientRect();
+      setRunning(r.bottom > 0 && r.top < window.innerHeight);
+    }
+  });
+}
+
+/* ---------- Anchor offset for fixed nav ---------- */
+Array.prototype.slice.call(document.querySelectorAll("a[href^='#']")).forEach(function(a){
+  a.addEventListener("click", function(e){
+    var id = a.getAttribute("href");
+    if (id.length < 2) return;
+    var el = document.querySelector(id);
+    if (!el) return;
+    e.preventDefault();
+    var y = el.getBoundingClientRect().top + window.scrollY - 56;
+    window.scrollTo({ top: y, behavior: reduceMotion ? "auto" : "smooth" });
+    history.replaceState(null, "", id);
+  });
+});
+})();
+</script>
+</body>
+</html>
